@@ -5,3 +5,7 @@
 5) define places/sites for permanent storage of input LED files (output of VeRawAnalyzer) and output files with histos and plots of gain drifts
 6) add list of bad runs in /input (make also list of good runs and information for them - date, N_of_events, processed or not, B field, ...)
 7) make procedure of defining Magnet_on and Magnet_off LED runs clear in README.txt (run summary and RMT table)
+------------------------------------
+1) create simple, universal and lightweighted analyzer for local runs with only tree and few histos in output
+2) create procedures and documentation for using analyzer, getting input and storing output files
+3) create postprocessor for output of analyzer, which plot maps and evolution curves, gives permanent list of gains drifts
