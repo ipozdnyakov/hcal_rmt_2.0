@@ -2,3 +2,4 @@
 2) implement purity and stability for monitoring of overal run quality and distinguish drift from fluctuations
 3) implement plot for time evolution of cells of interest within runs of interest
 4) implement high_threshold and low_threshold to distinguish drift from faults
+5) define places/sites for permanent storage of input LED files (output of VeRawAnalyzer) and output files with histos and plots of gain drifts
