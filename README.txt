@@ -2,14 +2,13 @@
 
 This project is intended to monitoring gains of hybrid photodetectors (HPD) and photomultiplier tubes (PMT) in HCAL.
 
-There are 8 subdetectors in HCAL:
+There are 8 subdetectors in HCAL and the following numeration is used:
+(0) HB depth 1, (1) depth 2
+(2) HE depth 1, (3) depth 2, (4) depth 3
+(5) HF depth 1, (6) depth 2
+(7) HO depth 4
 
-HB depth 1, depth 2
-HE depth 1, depth 2, depth 3
-HF depth 1, depth 2
-HO depth 4
-
-
+This project is versionised in github.com/ipozdnyakov/hcal_rmt_2.0
 
 2. INPUT DATA FOR MONITORING
 
@@ -68,7 +67,7 @@ all *.C filese are "script" files for ROOT CINT and should be run from lxplus wi
 (to have acces to /afs/cern.ch/work/k/kodolova/public/RDMweb/histos/)
 > root -l -b
 
-
+TASK.txt - list of current tasks for the project
 
 4. USER MANUAL
 
