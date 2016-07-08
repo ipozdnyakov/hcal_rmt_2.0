@@ -8,6 +8,8 @@ There are 8 subdetectors in HCAL and the following numeration is used:
 (5) HF depth 1, (6) depth 2
 (7) HO depth 4
 
+HIT: One should not devide results by depths in presentations due to direct (independent of depth) way from LED to PMT/HPT
+
 This project is versionised in github.com/ipozdnyakov/hcal_rmt_2.0
 
 2. INPUT DATA FOR MONITORING
