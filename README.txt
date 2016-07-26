@@ -1,18 +1,38 @@
 1. INTRODUCTION
 
-This project is intended to monitoring gains of hybrid photodetectors (HPD) and photomultiplier tubes (PMT) in HCAL.
+	This project is intended to monitoring gains of hybrid 
+	photodetectors (HPD) and photomultiplier  tubes  (PMT) 
+	in CMS HCAL.
 
-There are 8 subdetectors in HCAL and the following numeration is used:
-(0) HB depth 1, (1) depth 2
-(2) HE depth 1, (3) depth 2, (4) depth 3
-(5) HF depth 1, (6) depth 2
-(7) HO depth 4
+	Project consists of two parts - 
+		1) PRODUCER. Filling histograms and TTrees 
+		   with ADC responses on LEDs. 
+		2) ANALYZER. Analyzing ADC responses on LEDs 
+		   and monitoring gains drifts. 
 
-HIT: One should not devide results by depths in presentations due to direct (independent of depth) way from LED to PMT/HPT
+	There are 8 subdetectors in  HCAL  and  the  following 
+	numeration is used in the project:
+		(0) HB depth 1, (1) depth 2
+		(2) HE depth 1, (3) depth 2, (4) depth 3
+		(5) HF depth 1, (6) depth 2
+		(7) HO depth 4
+	HINT: One  should  not  divide  results  by  depths in 
+	presentations due to direct (independent of depth) way 
+	from LED to PMT/HPT
 
-This project is versionised in github.com/ipozdnyakov/hcal_rmt_2.0
 
-2. INPUT DATA FOR MONITORING
+2. ARCHITECTURE OF THE PROJECT
+
+	PRODUCER is a CMSSW analyzer, which  takes  data  from 
+	local  runs  (LED  runs)  of  CMS  detector  that  are 
+	permanently stored in CMS database.
+ 
+	ANALYZER  is  a  set  of  "scripts"  for   CINT   ROOT 
+	interpretator. 
+
+2.1 INPUT DATA FOR PRODUCER
+
+2.2 INPUT DATA FOR ANALYZER
 
 Files /afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_* (LED files)
 produced with VeRawAnalyzer.cc are used as input for the monitoring.
@@ -37,6 +57,11 @@ Currently histos h_mapDepth1/2/3/4ADCAmpl_HB/HE/HF/HO used for monitoring.
 
 
 3. CONTENT OF THE PROJECT
+
+PRODUCER:
+
+
+ANALYZER:
 
 /input			- directory with list of input files and arrays of input runs stored in text files
 
@@ -71,7 +96,13 @@ all *.C filese are "script" files for ROOT CINT and should be run from lxplus wi
 
 TASK.txt - list of current tasks for the project
 
-4. USER MANUAL
+
+4. USE OF THE PROJECT
+
+4.1 USER MANUAL FOR PRODUCER
+
+
+4.2 USER MANUAL FOR ANALYZER
 
 One can use this project as follows:
 
@@ -84,3 +115,19 @@ One can use this project as follows:
 
 All scripts should be declared in root by executing > .x "script_name.C" or > .L "script_name.C"
 directories /input and /output should be created
+
+
+
+5. TASKS FOR FURTHER DEVELOPMENT
+
+1) add Q > 50 linADC criteria for each cell in reference run
+2) implement purity and stability for monitoring of overal run quality and distinguish drift from fluctuations
+3) implement plot for time evolution of cells of interest within runs of interest
+4) implement high_threshold and low_threshold to distinguish drift from faults
+5) define places/sites for permanent storage of input LED files (output of VeRawAnalyzer) and output files with histos and plots of gain drifts
+6) add list of bad runs in /input (make also list of good runs and information for them - date, N_of_events, processed or not, B field, ...)
+7) make procedure of defining Magnet_on and Magnet_off LED runs clear in README.txt (run summary and RMT table)
+------------------------------------
+1) create simple, universal and lightweighted analyzer for local runs with only tree and few histos in output
+2) create procedures and documentation for using analyzer, getting input and storing output files
+3) create postprocessor for output of analyzer, which plot maps and evolution curves, gives permanent list of gains drifts
