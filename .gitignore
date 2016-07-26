@@ -1,0 +1,7 @@
+*.root
+*.exe
+*.png
+*.log
+log*
+runlist*
+fullSrc*

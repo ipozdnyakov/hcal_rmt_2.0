@@ -1,0 +1,256 @@
+
+SQL*Plus: Release 10.2.0.4.0 - Production on Mon Sep 14 19:24:46 2015
+
+Copyright (c) 1982, 2007, Oracle.  All Rights Reserved.
+
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, OLAP, Data Mining
+and Real Application Testing options
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255722 04-SEP-15 09.41.29.212956 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_fiberID_8uHBHE
+    255722 04-SEP-15 09.41.29.178793 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      100
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255725 04-SEP-15 09.48.03.575295 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_fiberID_8uHBHE
+    255725 04-SEP-15 09.48.03.565455 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      100
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255727 04-SEP-15 09.49.09.971838 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_fiberID_8uHBHE
+    255727 04-SEP-15 09.49.09.957822 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      1000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255736 04-SEP-15 10.28.27.584568 AM                       CMS.HCAL_HF:FM_FULLPATH        /hcalpro/USC/HF/HF_pedestal_4uTCA_1VME
+    255736 04-SEP-15 10.28.27.573328 AM                       CMS.HCAL_HF:TRIGGERS           1000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255738 04-SEP-15 10.56.30.267563 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_fiberID_8uHBHE
+    255738 04-SEP-15 10.56.30.261062 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      100
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255751 04-SEP-15 11.13.26.317362 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_fiberID_8uHBHE
+    255751 04-SEP-15 11.13.26.303274 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      100
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255755 04-SEP-15 11.25.16.045192 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    255755 04-SEP-15 11.25.16.033473 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255761 04-SEP-15 11.38.56.489733 AM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBM_Megatile
+    255761 04-SEP-15 11.38.56.475470 AM                       CMS.HCAL_HBHEa:TRIGGERS        10000
+    255761 04-SEP-15 11.38.57.823475 AM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBM_Megatile
+    255761 04-SEP-15 11.38.57.813439 AM                       CMS.HCAL_HBHEb:TRIGGERS        10000
+    255761 04-SEP-15 11.38.57.818354 AM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBM_Megatile
+    255761 04-SEP-15 11.38.57.808435 AM                       CMS.HCAL_HBHEc:TRIGGERS        10000
+    255761 04-SEP-15 11.37.22.802118 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBM_Megatile
+    255761 04-SEP-15 11.37.22.776517 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255765 04-SEP-15 11.45.28.509539 AM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBP_Megatile
+    255765 04-SEP-15 11.45.28.501555 AM                       CMS.HCAL_HBHEa:TRIGGERS        10000
+    255765 04-SEP-15 11.45.29.948541 AM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBP_Megatile
+    255765 04-SEP-15 11.45.29.942110 AM                       CMS.HCAL_HBHEb:TRIGGERS        10000
+    255765 04-SEP-15 11.45.29.921309 AM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBP_Megatile
+    255765 04-SEP-15 11.45.29.911403 AM                       CMS.HCAL_HBHEc:TRIGGERS        10000
+    255765 04-SEP-15 11.45.29.884927 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBP_Megatile
+    255765 04-SEP-15 11.45.29.877429 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255767 04-SEP-15 11.54.42.963027 AM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEM_Megatile
+    255767 04-SEP-15 11.54.42.956609 AM                       CMS.HCAL_HBHEa:TRIGGERS        10000
+    255767 04-SEP-15 11.54.43.965114 AM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEM_Megatile
+    255767 04-SEP-15 11.54.43.945792 AM                       CMS.HCAL_HBHEb:TRIGGERS        10000
+    255767 04-SEP-15 11.54.43.957656 AM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEM_Megatile
+    255767 04-SEP-15 11.54.43.951656 AM                       CMS.HCAL_HBHEc:TRIGGERS        10000
+    255767 04-SEP-15 11.51.53.954281 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEM_Megatile
+    255767 04-SEP-15 11.51.53.945629 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255769 04-SEP-15 12.06.48.858538 PM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEP_Megatile
+    255769 04-SEP-15 12.06.48.849777 PM                       CMS.HCAL_HBHEa:TRIGGERS        10000
+    255769 04-SEP-15 12.06.49.930093 PM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEP_Megatile
+    255769 04-SEP-15 12.06.49.921453 PM                       CMS.HCAL_HBHEb:TRIGGERS        10000
+    255769 04-SEP-15 12.06.49.940749 PM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEP_Megatile
+    255769 04-SEP-15 12.06.49.933756 PM                       CMS.HCAL_HBHEc:TRIGGERS        10000
+    255769 04-SEP-15 12.06.14.931738 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEP_Megatile
+    255769 04-SEP-15 12.06.14.923571 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255774 04-SEP-15 12.18.31.079988 PM                       CMS.HCAL_HF:FM_FULLPATH        /hcalpro/USC/HF/HF_laser_raddam
+    255774 04-SEP-15 12.18.31.057569 PM                       CMS.HCAL_HF:TRIGGERS           10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255782 04-SEP-15 12.40.31.912170 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_8uHBHE
+    255782 04-SEP-15 12.40.31.893264 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255786 04-SEP-15 12.49.59.397889 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_8uHBHE
+    255786 04-SEP-15 12.49.59.379441 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255794 04-SEP-15 01.21.23.647669 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_8uHBHE
+    255794 04-SEP-15 01.21.23.623303 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255796 04-SEP-15 01.38.21.598423 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_8uHBHE
+    255796 04-SEP-15 01.38.21.590699 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255801 04-SEP-15 01.52.10.008353 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_8uHBHE
+    255801 04-SEP-15 01.52.09.994381 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255802 04-SEP-15 01.57.13.012730 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_8uHBHE
+    255802 04-SEP-15 01.57.13.002000 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255805 04-SEP-15 02.05.53.691840 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    255805 04-SEP-15 02.05.53.682023 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255806 04-SEP-15 02.12.33.664288 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    255806 04-SEP-15 02.12.33.654980 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255807 04-SEP-15 02.16.45.657206 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    255807 04-SEP-15 02.16.45.650237 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255809 04-SEP-15 02.24.36.787096 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    255809 04-SEP-15 02.24.36.779700 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255812 04-SEP-15 02.29.04.083623 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    255812 04-SEP-15 02.29.04.072729 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255815 04-SEP-15 02.40.13.096682 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    255815 04-SEP-15 02.40.13.086217 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255817 04-SEP-15 02.46.46.914906 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    255817 04-SEP-15 02.46.46.893567 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255825 04-SEP-15 02.56.40.533263 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_fiberID_8uHBHE
+    255825 04-SEP-15 02.56.40.522195 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      100
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    255874 05-SEP-15 11.34.27.239455 AM                       CMS.HCAL_HF:FM_FULLPATH        /hcalpro/USC/HF/HF_pedestal_4uTCA_1VME
+    255874 05-SEP-15 11.34.27.230883 AM                       CMS.HCAL_HF:TRIGGERS           1000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256008 07-SEP-15 07.20.37.735692 AM                       CMS.HCAL_HF:FM_FULLPATH        /hcalpro/USC/HF/HF_laser_raddam
+    256008 07-SEP-15 07.20.37.658926 AM                       CMS.HCAL_HF:TRIGGERS           10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256009 07-SEP-15 07.24.05.512163 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    256009 07-SEP-15 07.24.05.502646 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256010 07-SEP-15 07.31.57.665338 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    256010 07-SEP-15 07.31.57.654401 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256011 07-SEP-15 07.40.10.393231 AM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBM_Megatile
+    256011 07-SEP-15 07.40.10.379575 AM                       CMS.HCAL_HBHEa:TRIGGERS        10000
+    256011 07-SEP-15 07.40.11.823966 AM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBM_Megatile
+    256011 07-SEP-15 07.40.11.811366 AM                       CMS.HCAL_HBHEb:TRIGGERS        10000
+    256011 07-SEP-15 07.40.11.845924 AM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBM_Megatile
+    256011 07-SEP-15 07.40.11.818130 AM                       CMS.HCAL_HBHEc:TRIGGERS        10000
+    256011 07-SEP-15 07.39.51.811277 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBM_Megatile
+    256011 07-SEP-15 07.39.51.799602 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256012 07-SEP-15 07.51.10.725311 AM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBP_Megatile
+    256012 07-SEP-15 07.51.10.719506 AM                       CMS.HCAL_HBHEa:TRIGGERS        10000
+    256012 07-SEP-15 07.51.12.160050 AM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBP_Megatile
+    256012 07-SEP-15 07.51.12.148342 AM                       CMS.HCAL_HBHEb:TRIGGERS        10000
+    256012 07-SEP-15 07.51.12.131910 AM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBP_Megatile
+    256012 07-SEP-15 07.51.12.125594 AM                       CMS.HCAL_HBHEc:TRIGGERS        10000
+    256012 07-SEP-15 07.48.46.993712 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HBP_Megatile
+    256012 07-SEP-15 07.48.46.983727 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256013 07-SEP-15 07.57.02.113046 AM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEM_Megatile
+    256013 07-SEP-15 07.57.02.105312 AM                       CMS.HCAL_HBHEa:TRIGGERS        10000
+    256013 07-SEP-15 07.57.03.422474 AM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEM_Megatile
+    256013 07-SEP-15 07.57.03.409750 AM                       CMS.HCAL_HBHEb:TRIGGERS        10000
+    256013 07-SEP-15 07.57.03.396269 AM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEM_Megatile
+    256013 07-SEP-15 07.57.03.389489 AM                       CMS.HCAL_HBHEc:TRIGGERS        10000
+    256013 07-SEP-15 07.54.38.265124 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEM_Megatile
+    256013 07-SEP-15 07.54.38.252785 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256016 07-SEP-15 08.02.44.857359 AM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEP_Megatile
+    256016 07-SEP-15 08.02.44.848877 AM                       CMS.HCAL_HBHEa:TRIGGERS        10000
+    256016 07-SEP-15 08.02.46.284372 AM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEP_Megatile
+    256016 07-SEP-15 08.02.46.278893 AM                       CMS.HCAL_HBHEb:TRIGGERS        10000
+    256016 07-SEP-15 08.02.46.295253 AM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEP_Megatile
+    256016 07-SEP-15 08.02.46.289870 AM                       CMS.HCAL_HBHEc:TRIGGERS        10000
+    256016 07-SEP-15 08.00.36.147441 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HBHEabc_Laser_HEP_Megatile
+    256016 07-SEP-15 08.00.36.134518 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      10000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256072 07-SEP-15 01.58.04.049128 PM                       CMS.HCAL_HBHEa:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_0uHBHE
+    256072 07-SEP-15 01.58.04.040199 PM                       CMS.HCAL_HBHEa:TRIGGERS        2000
+    256072 07-SEP-15 01.57.51.028330 PM                       CMS.HCAL_HBHEb:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_0uHBHE
+    256072 07-SEP-15 01.57.51.014296 PM                       CMS.HCAL_HBHEb:TRIGGERS        2000
+    256072 07-SEP-15 01.57.51.043133 PM                       CMS.HCAL_HBHEc:FM_FULLPATH     /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_0uHBHE
+    256072 07-SEP-15 01.57.51.031416 PM                       CMS.HCAL_HBHEc:TRIGGERS        2000
+    256072 07-SEP-15 01.57.56.838003 PM                       CMS.HCAL_HF:FM_FULLPATH        /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_0uHBHE
+    256072 07-SEP-15 01.57.56.830226 PM                       CMS.HCAL_HF:TRIGGERS           2000
+    256072 07-SEP-15 01.57.51.100075 PM                       CMS.HCAL_HO:FM_FULLPATH        /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_0uHBHE
+    256072 07-SEP-15 01.57.51.070832 PM                       CMS.HCAL_HO:TRIGGERS           2000
+    256072 07-SEP-15 01.57.50.836736 PM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_0uHBHE
+    256072 07-SEP-15 01.57.50.826206 PM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256288 11-SEP-15 07.45.17.684651 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_pedestal_8uHBHE
+    256288 11-SEP-15 07.45.17.645203 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+ RUNNUMBER TIME                                               NAME                           STRING_VALUE
+---------- -------------------------------------------------- ------------------------------ --------------------------------------------------------------------------------
+    256290 11-SEP-15 08.10.42.723038 AM                       CMS.HCAL_LEVEL_1:FM_FULLPATH   /hcalpro/USC/Local_multipartition/HCAL_all_LED_8uHBHE
+    256290 11-SEP-15 08.10.42.697903 AM                       CMS.HCAL_LEVEL_1:TRIGGERS      2000
+
+Disconnected from Oracle Database 11g Enterprise Edition Release 11.2.0.4.0 - 64bit Production
+With the Partitioning, Real Application Clusters, OLAP, Data Mining
+and Real Application Testing options

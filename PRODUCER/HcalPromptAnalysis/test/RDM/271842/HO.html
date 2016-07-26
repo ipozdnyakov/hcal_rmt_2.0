@@ -1,0 +1,154 @@
+</html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html"/>
+<title> Remote Monitoring Tool </title>
+<style type="text/css">
+ body,td{ background-color: #FFFFCC; font-family: arial, arial ce, helvetica; font-size: 12px; }
+   td.s0 { font-family: arial, arial ce, helvetica; }
+   td.s1 { font-family: arial, arial ce, helvetica; font-weight: bold; background-color: #FFC169; text-align: center;}
+   td.s2 { font-family: arial, arial ce, helvetica; background-color: #eeeeee; }
+   td.s3 { font-family: arial, arial ce, helvetica; background-color: #d0d0d0; }
+   td.s4 { font-family: arial, arial ce, helvetica; background-color: #FFC169; }
+   td.s5 { font-family: arial, arial ce, helvetica; background-color: #FF00FF; }
+   td.s6 { font-family: arial, arial ce, helvetica; background-color: #9ACD32; }
+   td.s7 { font-family: arial, arial ce, helvetica; background-color: #32CD32; }
+   td.s8 { font-family: arial, arial ce, helvetica; background-color: #00FFFF; }
+   td.s9 { font-family: arial, arial ce, helvetica; background-color: #FFE4E1; }
+   td.s10 { font-family: arial, arial ce, helvetica; background-color: #A0522D; }
+   td.s11 { font-family: arial, arial ce, helvetica; background-color: #1E90FF; }
+   td.s12 { font-family: arial, arial ce, helvetica; background-color: #00BFFF; }
+   td.s13 { font-family: arial, arial ce, helvetica; background-color: #FFFF00; }
+   td.s14 { font-family: arial, arial ce, helvetica; background-color: #B8860B; }
+</style>
+<body>
+<h1> HCAL OUTER, RUN = 271842 </h1>
+<br>
+<h2> 1. Analysis results for HO</h2>
+<table width="600">
+<tr>
+  <td><a href="https://cms-cpt-software.web.cern.ch/cms-cpt-software/General/Validation/SVSuite/HcalRemoteMonitoring/RMT/LED_271842/HO_Tile.html">Megatile Channels</a></td>
+  <td><a href="https://cms-cpt-software.web.cern.ch/cms-cpt-software/General/Validation/SVSuite/HcalRemoteMonitoring/RMT/LED_271842/HO_Calib.html">Calibration Channels</a></td>
+  <td><a href="https://cms-cpt-software.web.cern.ch/cms-cpt-software/General/Validation/SVSuite/HcalRemoteMonitoring/RMT/LED_271842/HO_Drift.html">Gain Stability</a></td>
+  <td><a href="https://cms-cpt-software.web.cern.ch/cms-cpt-software/General/Validation/SVSuite/HcalRemoteMonitoring/RMT/LED_271842/HO_Pedestals.html">Pedestals</a></td>
+  <td><a href="https://cms-cpt-software.web.cern.ch/cms-cpt-software/General/Validation/SVSuite/HcalRemoteMonitoring/RMT/LED_271842/HO_Shapes.html">ADC Shapes</a></td>
+</tr>
+</table>
+<br>
+<h2> 2.Status HO over all criteria </h2>
+<h3> 2.A.Channel map for each Depth </h3>
+<h4> Channel legend: green - good, red - bad (rate of failures at least 0.1), yellow - at least 2% gain drift, white - not applicable or out of range </h4>
+ <img src="MAPHO.png" />
+<br>
+<h3> 2.B.List of Bad channels (rate > 0.1) and its rates for each RMT criteria (for GS - %) </h3>
+  <td><a href="https://cms-cpt-software.web.cern.ch/cms-cpt-software/General/Validation/SVSuite/HcalRemoteMonitoring/RMT/LED_271842/HELP.html"> Description of criteria for bad channel selection</a></td>
+<table>
+<tr><td class="s4" align="center">#</td>
+<td class="s1" align="center">ETA</td>
+<td class="s1" align="center">PHI</td>
+<td class="s1" align="center">DEPTH</td>
+<td class="s1" align="center">RBX</td>
+<td class="s1" align="center">RM</td>
+<td class="s1" align="center">PIXEL</td>
+<td class="s1" align="center">RM_FIBER</td>
+<td class="s1" align="center">FIBER_CH</td>
+<td class="s1" align="center">QIE</td>
+<td class="s1" align="center">ADC</td>
+<td class="s1" align="center">CRATE</td>
+<td class="s1" align="center">DCC</td>
+<td class="s1" align="center">SPIGOT</td>
+<td class="s1" align="center">HTR_FIBER</td>
+<td class="s1" align="center">HTR_SLOT</td>
+<td class="s1" align="center">HTR_FPGA</td>
+<td class="s5" align="center">Cm</td>
+<td class="s5" align="center">Am</td>
+<td class="s5" align="center">Wm</td>
+<td class="s5" align="center">Rm</td>
+<td class="s5" align="center">TNm</td>
+<td class="s5" align="center">TXm</td>
+<td class="s9" align="center">GS (%)</td>
+<td class="s4" align="center">Pm</td>
+<td class="s4" align="center">pWm</td>
+<td class="s8" align="center">Cc</td>
+<td class="s8" align="center">Ac</td>
+<td class="s8" align="center">Wc</td>
+<td class="s8" align="center">Rc</td>
+<td class="s8" align="center">TNc</td>
+<td class="s8" align="center">TXc</td>
+</tr>
+</table>
+<br>
+<h3> 2.C.List of Gain unstable channels and its value in % (for other criterias - rate)</h3>
+<table>
+<tr><td class="s4" align="center">#</td>
+<td class="s1" align="center">ETA</td>
+<td class="s1" align="center">PHI</td>
+<td class="s1" align="center">DEPTH</td>
+<td class="s1" align="center">RBX</td>
+<td class="s1" align="center">RM</td>
+<td class="s1" align="center">PIXEL</td>
+<td class="s1" align="center">RM_FIBER</td>
+<td class="s1" align="center">FIBER_CH</td>
+<td class="s1" align="center">QIE</td>
+<td class="s1" align="center">ADC</td>
+<td class="s1" align="center">CRATE</td>
+<td class="s1" align="center">DCC</td>
+<td class="s1" align="center">SPIGOT</td>
+<td class="s1" align="center">HTR_FIBER</td>
+<td class="s1" align="center">HTR_SLOT</td>
+<td class="s1" align="center">HTR_FPGA</td>
+<td class="s5" align="center">Cm</td>
+<td class="s5" align="center">Am</td>
+<td class="s5" align="center">Wm</td>
+<td class="s5" align="center">Rm</td>
+<td class="s5" align="center">TNm</td>
+<td class="s5" align="center">TXm</td>
+<td class="s9" align="center">GS(%)</td>
+<td class="s4" align="center">Pm</td>
+<td class="s4" align="center">pWm</td>
+<td class="s8" align="center">Cc</td>
+<td class="s8" align="center">Ac</td>
+<td class="s8" align="center">Wc</td>
+<td class="s8" align="center">Rc</td>
+<td class="s8" align="center">TNc</td>
+<td class="s8" align="center">TXc</td>
+</tr>
+</table>
+<br>
+<h3> 2.D.List of channels with Bad Pedestals (rate > 0.1) and its rates (for GS - %)</h3>
+<table>
+<tr><td class="s4" align="center">#</td>
+<td class="s1" align="center">ETA</td>
+<td class="s1" align="center">PHI</td>
+<td class="s1" align="center">DEPTH</td>
+<td class="s1" align="center">RBX</td>
+<td class="s1" align="center">RM</td>
+<td class="s1" align="center">PIXEL</td>
+<td class="s1" align="center">RM_FIBER</td>
+<td class="s1" align="center">FIBER_CH</td>
+<td class="s1" align="center">QIE</td>
+<td class="s1" align="center">ADC</td>
+<td class="s1" align="center">CRATE</td>
+<td class="s1" align="center">DCC</td>
+<td class="s1" align="center">SPIGOT</td>
+<td class="s1" align="center">HTR_FIBER</td>
+<td class="s1" align="center">HTR_SLOT</td>
+<td class="s1" align="center">HTR_FPGA</td>
+<td class="s5" align="center">Cm</td>
+<td class="s5" align="center">Am</td>
+<td class="s5" align="center">Wm</td>
+<td class="s5" align="center">Rm</td>
+<td class="s5" align="center">TNm</td>
+<td class="s5" align="center">TXm</td>
+<td class="s9" align="center">GS(%)</td>
+<td class="s4" align="center">Pm</td>
+<td class="s4" align="center">pWm</td>
+<td class="s8" align="center">Cc</td>
+<td class="s8" align="center">Ac</td>
+<td class="s8" align="center">Wc</td>
+<td class="s8" align="center">Rc</td>
+<td class="s8" align="center">TNc</td>
+<td class="s8" align="center">TXc</td>
+</tr>
+</table>
+</body> 
+</html> 

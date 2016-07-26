@@ -1,0 +1,36 @@
+</html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html"/>
+<title> Remote Monitoring Tool </title>
+<style type="text/css">
+ body,td{ background-color: #FFFFCC; font-family: arial, arial ce, helvetica; font-size: 12px; }
+   td.s0 { font-family: arial, arial ce, helvetica; }
+   td.s1 { font-family: arial, arial ce, helvetica; font-weight: bold; background-color: #FFC169; text-align: center;}
+   td.s2 { font-family: arial, arial ce, helvetica; background-color: #eeeeee; }
+   td.s3 { font-family: arial, arial ce, helvetica; background-color: #d0d0d0; }
+   td.s4 { font-family: arial, arial ce, helvetica; background-color: #FFC169; }
+</style>
+<body>
+<h1> Pedestals for HO, RUN = 271842 </h1>
+<br>
+<h2> 1.Pm criterion: Pedestals for each CapID .</h3>
+<h3> 1.A. Pedestal distribution over all events, channels for each CapID and all depths.</h3>
+<h4> Legend: Bins less 0.1 correpond to bad Pedestals </h4>
+ <img src="HistPedestalsHO.png" />
+<br>
+<h3> 1.B. Rate of channels at very low Pedestals at least in one CapID for each depth.</h3>
+<h4> Channel legend: white - good, other colour - bad. </h4>
+ <img src="MapRatePedHO.png" />
+<h2> 2.pWm criterion: Pedestal Widths for each CapID .</h3>
+<h3> 2.A. Pedestal Widths distribution over all events, channels for each CapID and all depths.</h3>
+<h4> Legend: Bins less 0.1 correpond to bad Pedestal Widths </h4>
+ <img src="HistPedestalWidthsHO.png" />
+<br>
+<h3> 2.B. Rate of channels at very low Pedestal Widths at least in one CapID for each depth.</h3>
+<h4> Channel legend: white - good, other colour - bad. </h4>
+ <img src="MapRatePedWidthsHO.png" />
+<h2> 3.Pedestal and pedestalWidths vs Amplitude .</h3>
+<h3> 3.A. Correlation of Pedestal(pedestalWidths) and Amplitude over all channels and events .</h3>
+<h4> Legend: colour - entries </h4>
+<img src="CorrelationsMapPedestalVsfullAmplitudeHO.png" />
+<br>

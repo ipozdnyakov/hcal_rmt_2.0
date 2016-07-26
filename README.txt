@@ -25,7 +25,11 @@
 
 	PRODUCER is a CMSSW analyzer, which  takes  data  from 
 	local  runs  (LED  runs)  of  CMS  detector  that  are 
-	permanently stored in CMS database.
+	permanently stored in CMS database. Code should be run 
+	from CMSSW_X_X_X/src, as PRODUCER initially taken from
+		/afs/cern.ch/cms/CAF/CMSALCA/ALCA_HCALCALIB/ \
+		HCALMONITORING/RDMScript/                    \
+		CMSSW807patch2_STABLE/src/RecoHcal/	     \
  
 	ANALYZER  is  a  set  of  "scripts"  for   CINT   ROOT 
 	interpretator. 

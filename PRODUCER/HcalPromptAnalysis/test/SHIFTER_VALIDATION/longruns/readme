@@ -1,0 +1,28 @@
+Keep in this dir. "longruns" the root file pieces of many possible runs like Global_258159_1.root... 
+- for its futher merging into one root file (for each run), like:
+
+hadd Global_longrunnumber.root Global_longrunnumber_1.root 
+Global_longrunnumber_2.root.........Global_longrunnumber_N.root 
+
+However, we have two scripts to facilitate the merging process:
+1) stay in main dir.:
+/afs/cern.ch/cms/CAF/CMSALCA/ALCA_HCALCALIB/HCALMONITORING/RDMScript/CMSSW_7_4_16_SHIFT/src/RecoHcal/HcalPromptAnalysis/test/SHIFTER_VALIDATION/
+2) issue the command 
+
+either(on line pointing of runs to merge):
+./glu_runs.csh longruns run1 run2 run2 ... runN
+
+or(use list of runs to merge in file "runlist":
+./glu_runs_fromfile.csh longruns runlist
+
+As a result, you'll get the merged root files for all asked runs in this main dir.
+
+3) Copy obtained merged runs (line by line) from main dir. into /eos as like this example:
+cmsStage -f Global_259818.root 
+/store/group/dpg_hcal/comm_hcal/www/HcalRemoteMonitoring/CMT/histos/Global_259818.root
+
+
+
+
+
+

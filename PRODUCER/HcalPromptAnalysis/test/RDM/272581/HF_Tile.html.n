@@ -1,0 +1,72 @@
+</html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html"/>
+<title> Remote Monitoring Tool </title>
+<style type="text/css">
+ body,td{ background-color: #FFFFCC; font-family: arial, arial ce, helvetica; font-size: 12px; }
+   td.s0 { font-family: arial, arial ce, helvetica; }
+   td.s1 { font-family: arial, arial ce, helvetica; font-weight: bold; background-color: #FFC169; text-align: center;}
+   td.s2 { font-family: arial, arial ce, helvetica; background-color: #eeeeee; }
+   td.s3 { font-family: arial, arial ce, helvetica; background-color: #d0d0d0; }
+   td.s4 { font-family: arial, arial ce, helvetica; background-color: #FFC169; }
+</style>
+<body>
+<h1> Criteria for megatile channels for HF, RUN = 272581 </h1>
+<br>
+<h2> 0. Entries for each channel.</h3>
+<h3> 0.A. Entries in each channel for each depth.</h3>
+<h4> Channel legend: color is rate of entries </h4>
+ <img src="MapRateEntryHF.png" />
+<br>
+<h2> 1. Cm criterion: CapID errors for each channel.</h3>
+<h3> 1.A. Rate of CapId failures in each channel for each depth.</h3>
+<h4> Channel legend: white - good, other colour - bad. </h4>
+ <img src="MapRateCapIDHF.png" />
+<br>
+<h2> 2. Am criterion: ADC amplitude collected over all TSs(Full Amplitude) for each channel. </h3>
+<h3> 2.A. Full ADC amplitude distribution over all events, channels and depths.</h3>
+<h4> Legend: Bins less 40 correpond to bad ADC amplitude </h4>
+ <img src="HistAmplHF.png" />
+<br>
+<h3> 2.B. Rate of bad ADC amplitude (<40) in each channel for each depth. </h3>
+<h4> Channel legend: white - good, other colours - bad. </h4>
+ <img src="MapRateAmplHF.png" />
+<br>
+<h2> 3. Wm criterion: RMS (width) of ADC amplutude for each channel.</h3>
+<h3> 3.A. RMS distribution over all events, channel and depth.</h3>
+<h4> Legend: Bins less 0.1 and more 2.6 correpond to bad RMS </h4>
+ <img src="HistRMSHF.png" />
+<br>
+<h3> 3.B. Rate of bad RMS (<0.1,>2.6) in each channel for each depth.</h3>
+<h4> Channel legend: white - good, other colour - bad. </h4>
+ <img src="MapRateRMSHF.png" />
+<br>
+<h2> 4. Rm criterion: Ratio ADC value sum over four near maximum (-2, -1, max, +1) TS to ADC value sum over all TS for each channel. </h3>
+<h3> 4.A. Ratio distribution over all events, channels and depths.</h3>
+<h4> Legend: Bins less 0.45 and more 1.02 correpond to bad ratio </h4>
+ <img src="Hist43TStoAllTSHF.png" />
+<br>
+<h3> 4.B. Rate of bad ratio (<0.45, >1.02) in each channel for each depth.</h3>
+<h4> Channel legend: white - good, other colour - bad. </h4>
+ <img src="MapRate43TStoAllTSHF.png" />
+<br>
+<h2> 5. TNm criterion: Mean TS position for each channel.</h3>
+<h3> 5.A. TN position distribution over all events, channels and depths.</h3>
+<h4> Legend: Bins less 1 and more 4.2 correpond to bad mean position </h4>
+ <img src="HistMeanPosHF.png" />
+<br>
+<h3> 5.B. Rate of bad TN position  (<1, >4.2) in each channel for each depth. </h3>
+<h4> Channel legend: white - good, other colour - bad. </h4>
+ <img src="MapRateMeanPosHF.png" />
+<br>
+<h2> 6.TXm criterion: Maximum TS position for each channel.</h3>
+<h3> 6.A. TX position distribution over all events, channel and depth.</h3>
+<h4> Legend: Bins less 0.5 and more 8.5 correpond to bad position </h4>
+ <img src="HistMaxPosHF.png" />
+<br>
+<h3> 6.B. Rate of bad TX position  (<0.5, >8.5) in each channel for each depth. </h3>
+<h4> Channel legend: white - good, other colour - bad. </h4>
+ <img src="MapRateMaxPosHF.png" />
+<br>
+</body> 
+</html> 

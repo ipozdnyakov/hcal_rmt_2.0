@@ -1,0 +1,27 @@
+</html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html"/>
+<title> Remote Monitoring Tool </title>
+<style type="text/css">
+ body,td{ background-color: #FFFFCC; font-family: arial, arial ce, helvetica; font-size: 12px; }
+   td.s0 { font-family: arial, arial ce, helvetica; }
+   td.s1 { font-family: arial, arial ce, helvetica; font-weight: bold; background-color: #FFC169; text-align: center;}
+   td.s2 { font-family: arial, arial ce, helvetica; background-color: #eeeeee; }
+   td.s3 { font-family: arial, arial ce, helvetica; background-color: #d0d0d0; }
+   td.s4 { font-family: arial, arial ce, helvetica; background-color: #FFC169; }
+</style>
+<body>
+<h1> ADC Shape for HE, RUN = 271842 </h1>
+<br>
+<h2> 1.Mean ADC Shape.</h3>
+<h3> 1.A. ADC shape averaged over all good channels, depth and events.</h3>
+ <img src="HistGoodTSshapesHE.png" />
+<br>
+<h3> 1.B. ADC shape averaged over all bad channels, depth and events. Bad channels are selected by 5 criteria: CapId, A, W, P, Pw </h3>
+ <img src="HistBadTSshapesHE.png" />
+<h2> 2. ADC in Time Slice </h3>
+<h3> 2.A. ADC counts  histogrammed over all channels, depth and events.</h3>
+ <img src="Hist_ADC_HE_All.png" />
+<br>
+<h3> 2.B. ADC counts  histogrammed over all channels and events for each depth separately. </h3>
+ <img src="Hist_ADC_HE_DS.png" />

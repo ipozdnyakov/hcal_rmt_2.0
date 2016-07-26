@@ -1,0 +1,197 @@
+I. zpedestals.C  --  to use pedestals in RMT
+
+      page1:     for HB
+h_pedestal0_HB       ->  cap0 pedestals 
+h_pedestal1_HB       ->  cap1 pedestals 
+h_pedestal2_HB       ->  cap2 pedestals 
+h_pedestal3_HB       ->  cap3 pedestals 
+h_pedestalaver4_HB   ->  pedestals, averaged over 4 caps
+h_pedestalaver9_HB   ->  pedestals, averaged over all caps in TSs
+
+      page2:     for HB
+h_pedestalw0_HB       ->  cap0 pedestal widths 
+h_pedestalw1_HB       ->  cap1 pedestal widths 
+h_pedestalw2_HB       ->  cap2 pedestal widths 
+h_pedestalw3_HB       ->  cap3 pedestal widths 
+h_pedestalwaver4_HB   ->  pedestal widths, averaged over 4 caps
+h_pedestalwaver9_HB   ->  pedestal widths, averaged over all caps in TSs
+
+      page3:     for HE
+h_pedestal0_HE       ->  cap0 pedestals 
+h_pedestal1_HE       ->  cap1 pedestals 
+h_pedestal2_HE       ->  cap2 pedestals 
+h_pedestal3_HE       ->  cap3 pedestals 
+h_pedestalaver4_HE   ->  pedestals, averaged over 4 caps
+h_pedestalaver9_HE   ->  pedestals, averaged over all caps in TSs
+
+      page4:     for HE
+h_pedestalw0_HE       ->  cap0 pedestal widths 
+h_pedestalw1_HE       ->  cap1 pedestal widths 
+h_pedestalw2_HE       ->  cap2 pedestal widths 
+h_pedestalw3_HE       ->  cap3 pedestal widths 
+h_pedestalwaver4_HE   ->  pedestal widths, averaged over 4 caps
+h_pedestalwaver9_HE   ->  pedestal widths, averaged over all caps in TSs
+
+      page5:     for HF
+h_pedestal0_HF       ->  cap0 pedestals 
+h_pedestal1_HF       ->  cap1 pedestals 
+h_pedestal2_HF       ->  cap2 pedestals 
+h_pedestal3_HF       ->  cap3 pedestals 
+h_pedestalaver4_HF   ->  pedestals, averaged over 4 caps
+h_pedestalaver9_HF   ->  pedestals, averaged over all caps in TSs
+
+      page6:     for HF
+h_pedestalw0_HF       ->  cap0 pedestal widths 
+h_pedestalw1_HF       ->  cap1 pedestal widths 
+h_pedestalw2_HF       ->  cap2 pedestal widths 
+h_pedestalw3_HF       ->  cap3 pedestal widths 
+h_pedestalwaver4_HF   ->  pedestal widths, averaged over 4 caps
+h_pedestalwaver9_HF   ->  pedestal widths, averaged over all caps in TSs
+
+      page7:     for HO
+h_pedestal0_HO       ->  cap0 pedestals 
+h_pedestal1_HO       ->  cap1 pedestals 
+h_pedestal2_HO       ->  cap2 pedestals 
+h_pedestal3_HO       ->  cap3 pedestals 
+h_pedestalaver4_HO   ->  pedestals, averaged over 4 caps
+h_pedestalaver9_HO   ->  pedestals, averaged over all caps in TSs
+
+      page8:     for HO
+h_pedestalw0_HO       ->  cap0 pedestal widths 
+h_pedestalw1_HO       ->  cap1 pedestal widths 
+h_pedestalw2_HO       ->  cap2 pedestal widths 
+h_pedestalw3_HO       ->  cap3 pedestal widths 
+h_pedestalwaver4_HO   ->  pedestal widths, averaged over 4 caps
+h_pedestalwaver9_HO   ->  pedestal widths, averaged over all caps in TSs
+
+      page9:     for HBdepth1,2
+h_mapDepth1pedestalw_HB divided by 
+h_mapDepth1_HB                  ->  occupancy rate for HBdepth1 for tails of pedestal widths
+h_mapDepth2pedestalw_HB divided by 
+h_mapDepth2_HB                  ->  occupancy rate for HBdepth2 for tails of pedestal widths
+
+     page10:     for HEdepth1,2
+h_mapDepth1pedestalw_HE divided by 
+h_mapDepth1_HE                  ->  occupancy rate for HEdepth1 for tails of pedestal widths
+h_mapDepth2pedestalw_HE divided by 
+h_mapDepth2_HE                  ->  occupancy rate for HEdepth2 for tails of pedestal widths
+h_mapDepth3pedestalw_HE divided by 
+h_mapDepth3_HE                  ->  occupancy rate for HEdepth3 for tails of pedestal widths
+
+     page11:     for HFdepth1,2
+h_mapDepth1pedestalw_HF divided by 
+h_mapDepth1_HF                  ->  occupancy rate for HFdepth1 for tails of pedestal widths
+h_mapDepth2pedestalw_HF divided by 
+h_mapDepth2_HF                  ->  occupancy rate for HFdepth2 for tails of pedestal widths
+
+     page12:     for HOdepth1,2
+h_mapDepth1pedestalw_HO divided by 
+h_mapDepth1_HO                  ->  occupancy rate for HOdepth1 for tails of pedestal widths
+h_mapDepth2pedestalw_HO divided by 
+h_mapDepth2_HO                  ->  occupancy rate for HOdepth2 for tails of pedestal widths
+
+     page13:     for HBdepth1,2
+h_mapDepth1pedestal_HB divided by 
+h_mapDepth1_HB                  ->  occupancy rate for HBdepth1 for tails of pedestals
+h_mapDepth2pedestal_HB divided by 
+h_mapDepth2_HB                  ->  occupancy rate for HBdepth2 for tails of pedestals
+
+     page14:     for HEdepth1,2
+h_mapDepth1pedestal_HE divided by 
+h_mapDepth1_HE                  ->  occupancy rate for HEdepth1 for tails of pedestals
+h_mapDepth2pedestal_HE divided by 
+h_mapDepth2_HE                  ->  occupancy rate for HEdepth2 for tails of pedestals
+h_mapDepth3pedestal_HE divided by 
+h_mapDepth3_HE                  ->  occupancy rate for HEdepth3 for tails of pedestals
+
+     page15:     for HFdepth1,2
+h_mapDepth1pedestal_HF divided by 
+h_mapDepth1_HF                  ->  occupancy rate for HFdepth1 for tails of pedestals
+h_mapDepth2pedestal_HF divided by 
+h_mapDepth2_HF                  ->  occupancy rate for HFdepth2 for tails of pedestals
+
+     page16:     for HOdepth1,2
+h_mapDepth1pedestal_HO divided by 
+h_mapDepth1_HO                  ->  occupancy rate for HOdepth1 for tails of pedestals
+h_mapDepth2pedestal_HO divided by 
+h_mapDepth2_HO                  ->  occupancy rate for HOdepth2 for tails of pedestals
+
+
+
+II. zothers.C  --  to use others in RMT
+
+      page3:     for HB
+h_gain_HB                  ->  channel gains
+h_respcorr_HB              ->  channel responce correctins
+h_timecorr_HB              ->  channel time correctins
+h_lutcorr_HB               ->  channel LUT correctins
+
+      page4:     for HE
+h_gain_HE                  ->  channel gains
+h_respcorr_HE              ->  channel responce correctins
+h_timecorr_HE              ->  channel time correctins
+h_lutcorr_HE               ->  channel LUT correctins
+
+      page5:     for HF
+h_gain_HF                  ->  channel gains
+h_respcorr_HF              ->  channel responce correctins
+h_timecorr_HF              ->  channel time correctins
+h_lutcorr_HF               ->  channel LUT correctins
+
+      page6:     for HO
+h_gain_HO                  ->  channel gains
+h_respcorr_HO              ->  channel responce correctins
+h_timecorr_HO              ->  channel time correctins
+h_lutcorr_HO               ->  channel LUT correctins
+
+
+
+III. zamplpedcorr.C  --  to see amplitude % pedestal & its_width correlations for RMT
+
+      page1:     for HB
+h_pedvsampl_HB divided by 
+h_pedvsampl0_HB          ->  HB pedestals(cap0) versus amplitude averaged over events & channels
+h_pedwvsampl_HB divided by 
+h_pedwvsampl0_HB         ->  HB pedestal widths(cap0) versus amplitude averaged over events & channels
+
+      page2:     for HB
+h2_pedvsampl_HB          ->  2D plot: Amplitude versus Pedestals(cap0) in HB
+h2_pedwvsampl_HB         ->  2D plot: Amplitude versus Pedestal Widths(cap0) in HB
+
+      page4:     for HE
+h_pedvsampl_HE divided by 
+h_pedvsampl0_HE          ->  HE pedestals(cap0) versus amplitude averaged over events & channels
+h_pedwvsampl_HE divided by 
+h_pedwvsampl0_HE         ->  HE pedestal widths(cap0) versus amplitude averaged over events & channels
+h2_pedvsampl_HE          ->  2D plot: Amplitude versus Pedestals(cap0) in HE
+h2_pedwvsampl_HE         ->  2D plot: Amplitude versus Pedestal Widths(cap0) in HE
+
+      page5:     for HF
+h_pedvsampl_HF divided by 
+h_pedvsampl0_HF          ->  HF pedestals(cap0) versus amplitude averaged over events & channels
+h_pedwvsampl_HF divided by 
+h_pedwvsampl0_HF         ->  HF pedestal widths(cap0) versus amplitude averaged over events & channels
+h2_pedvsampl_HF          ->  2D plot: Amplitude versus Pedestals(cap0) in HF
+h2_pedwvsampl_HF         ->  2D plot: Amplitude versus Pedestal Widths(cap0) in HF
+
+      page6:     for HO
+h_pedvsampl_HO divided by 
+h_pedvsampl0_HO          ->  HO pedestals(cap0) versus amplitude averaged over events & channels
+h_pedwvsampl_HO divided by 
+h_pedwvsampl0_HO         ->  HO pedestal widths(cap0) versus amplitude averaged over events & channels
+h2_pedvsampl_HO          ->  2D plot: Amplitude versus Pedestals(cap0) in HO
+h2_pedwvsampl_HO         ->  2D plot: Amplitude versus Pedestal Widths(cap0) in HO
+
+
+IV. zRunEstimator0.C - to use pedestals in CMT
+
+1st page for HB depth1 
+plot 1: TH1F  h_sumPedestalLS1          ................. definition 1.
+plot 2: TH2F  h_2DsumPedestalLS1 divided by 
+              h_2D0sumPedestalLS1       ................. definition 2.
+plot 3: TH1F  h_sumPedestalperLS1 divided by
+              h_sum0PedestalperLS1      ................. definition 3.
+
+Respectively, 2nd- 8th pages are for HB depth2, HE depth1-3, HF depth1-2, HO depth4 with
+corresponding changing of last letter numbering to 2-8 in plotted variables. 
+

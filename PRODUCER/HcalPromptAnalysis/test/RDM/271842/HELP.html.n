@@ -1,0 +1,36 @@
+</html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html"/>
+<title> Remote Monitoring Tool </title>
+<style type="text/css">
+ body,td{ background-color: #FFFFCC; font-family: arial, arial ce, helvetica; font-size: 12px; }
+   td.s0 { font-family: arial, arial ce, helvetica; }
+   td.s1 { font-family: arial, arial ce, helvetica; font-weight: bold; background-color: #FFC169; text-align: center;}
+   td.s2 { font-family: arial, arial ce, helvetica; background-color: #eeeeee; }
+   td.s3 { font-family: arial, arial ce, helvetica; background-color: #d0d0d0; }
+   td.s4 { font-family: arial, arial ce, helvetica; background-color: #FFC169; }
+</style>
+<body>
+<h1>  Description of Remote Monitoring Tool criteria for bad channel selection</h1>
+<br>
+<h3> - C means CAPID Errors assuming we inspect CAPID non-rotation,error & validation bits, and for this criterion - no need to apply any cuts to select bcs.</h3> 
+<br>
+<h3> - A means full amplitude, collected over all time slices </h3> 
+<h3> - R means ratio criterion where we define as a bad, the channels, for which the signal portion in 4 middle TSs(plus one, minus two around TS with maximal amplitude) is out of some range of reasonable values </h3> 
+<br>
+<h3> - W means width of shape distribution. Width is defined as square root from dispersion. </h3> 
+<br>
+<h3> - TN means mean time position of adc signal. </h3> 
+<br>
+<h3> - TX means TS number of maximum signal </h3> 
+<br>
+<h3> - m means megatile channels. For example Am means Amplitude criteria for megatile channels </h3> 
+<br>
+<h3> - c means calibration channels. For example Ac means Amplitude criteria for calibration channels </h3> 
+<br>
+<h3> - Pm means Pedestals. </h3> 
+<br>
+<h3> - pWm  means pedestal Width. </h3> 
+<br>
+</body> 
+</html> 
