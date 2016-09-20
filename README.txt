@@ -126,6 +126,7 @@ ANALYZER:
 	   list_of_LED_files  -  so,   first   run   in   this  
 	   remaining list wiil be the reference run
 	   +Update list of runs in Nrun_HCALL.C
+	   +Update list of runs in Nrun_cell.C
 
 	3) Check outputs in Nrun_HCAL and Drun_HCAL
 	   performing steps 3a) and 3b)
