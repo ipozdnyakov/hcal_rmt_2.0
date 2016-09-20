@@ -73,11 +73,12 @@ ANALYZER:
 	list_of_LED_files 
 	- list of files (runs) of interest -- 1 file for 1 run
 
-	/output	
-	- directory for output .root and .gif files
+	bad_cells
+	- list of cells for  reading  by  Ncell.C,  output  of 
+	Nrun_HCAL.C
 
-	/scripts		
-	- directory contains scripts for monitoring
+	/output	
+	- directory for output .root, .gif and text files
 
 	Drun_cell.C		
 	- analyse gains for particular pair of runs  and  cell 
@@ -104,6 +105,10 @@ ANALYZER:
 	calibrated (drift is more than threshold) with  regard 
 	to ref run  (first  run)  also  outputs  corresponding 
 	histos in .root and .gif files
+
+	Ncell.C
+	- read list of cells from  ./input/bad_cells  and  run 
+	Nrun_cell.C for each cell
 
 	Choose_subdetector.C	
 	- return name of histogram of interest by  the  number 
