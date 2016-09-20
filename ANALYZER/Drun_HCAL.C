@@ -1,6 +1,6 @@
 void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03){
 
-cout << "Run-" << run2 << "/Run-" << run1 << "-t-" << threshold << ":\t";
+cout << " " << run2 << ":\t";
 
 //declaration of reference and analysed files and TH2D histos for the data from them, declaration of other variables
 
@@ -8,9 +8,10 @@ TFile *run_ref = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/L
 TFile *run_ana = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + run2 + ".root", "READ");
 TH2F	*ampl_ref[8], *ampl_ana[8], *ampl_ratio[8];
 TH1F	*ratio_distr[8];
-int chan_count = 0; 	//all channels
-int cal_count = 0;  	//channels need to be calibrated in subdetector
-int tot_cal_count = 0;  //channels need to be calibrated in total
+int chan_count = 0; 		//all channels
+int subd_cal_count = 0;  	//channels need to be calibrated in subdetector
+int cal_count = 0;  		//channels need to be calibrated in subdetector X depth
+int tot_cal_count = 0;  	//channels need to be calibrated in total
 double drift = 0.;
 TString	hist_name, hist_title;
 TString	titles[] = {"HB1", "HB2", "HE1", "HE2", "HE3", "HF1", "HF2", "HO4"};
@@ -92,13 +93,21 @@ for(int subd = 0; subd < 8; subd++){
 
 	//increase total number of channels what need to be calibrated
 	tot_cal_count += cal_count;
+	subd_cal_count += cal_count;
 
-	//output the results
+	//output the results for each subdetector X depth
 	
 	if(chan_count > 0){
 		cout << cal_count << "\t";
 	}else{
 		cout << "empty_run\t";
+	}
+
+	// output results for subdetector
+
+	if((subd == 1)||(subd == 4)||(subd == 6)){
+		cout << subd_cal_count << "\t";
+		subd_cal_count = 0;
 	}
 
 	//return counters to zero
