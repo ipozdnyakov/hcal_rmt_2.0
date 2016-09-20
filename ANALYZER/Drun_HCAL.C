@@ -1,4 +1,4 @@
-void Drun_HCAL(TString run1 = "271961", TString run2 = "273961", double threshold = 0.03){
+void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03){
 
 cout << "Run-" << run2 << "/Run-" << run1 << "-t-" << threshold << ":\t";
 
@@ -112,14 +112,14 @@ for(int subd = 0; subd < 8; subd++){
 	//write all histos to .root file and to .gif files
 	//by default .gif files printing is commented to avoid unwanted output to the terminal - one can uncomment them if needed
 
-	TFile *output = new TFile("/afs/cern.ch/user/i/ivanp/2016_HCAL_gains_monitoring/output/Drun_" + run1 + "_" + run2 + ".root", "RECREATE");
+	TFile *output = new TFile("./output/Drun_" + run1 + "_" + run2 + ".root", "RECREATE");
 	TCanvas *cnvs;
 	for(int i = 0; i < 8; i++){
 		cnvs = new TCanvas(titles[i]);
 		ampl_ratio[i]->Draw("colz");
-//		cnvs->Print("/afs/cern.ch/user/i/ivanp/2016_HCAL_gains_monitoring/output/Drun_" + run1 + "_" + run2 + "_2D" + titles[i] + ".gif");
+//		cnvs->Print("./output/Drun_" + run1 + "_" + run2 + "_2D" + titles[i] + ".gif");
 		ratio_distr[i]->Draw("");
-//		cnvs->Print("/afs/cern.ch/user/i/ivanp/2016_HCAL_gains_monitoring/output/Drun_" + run1 + "_" + run2 + "_1D" + titles[i] + ".gif");
+//		cnvs->Print("./output/Drun_" + run1 + "_" + run2 + "_1D" + titles[i] + ".gif");
 		delete cnvs;
 		ampl_ratio[i]->Write();
 		ratio_distr[i]->Write();
