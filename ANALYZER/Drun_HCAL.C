@@ -59,14 +59,14 @@ for(int subd = 0; subd < 8; subd++){
 
 						//output bad cells (and converting from bin nuber to eta)
 
-						cout << subd << "\t";
+						//cout << subd << "\t";
 
 					        if( xi > 41){
-					                cout << xi - 41 << "\t";
+					                //cout << xi - 41 << "\t";
 					        }else{
-					              	cout << xi - 42 << "\t";
+					              	//cout << xi - 42 << "\t";
 					        }
-						cout << yi << "\n";
+						//cout << yi << "\n";
 
 					};
 
@@ -96,9 +96,9 @@ for(int subd = 0; subd < 8; subd++){
 	//output the results
 	
 	if(chan_count > 0){
-//		cout << cal_count << "\t";
+		cout << cal_count << "\t";
 	}else{
-//		cout << "empty_run\t";
+		cout << "empty_run\t";
 	}
 
 	//return counters to zero
@@ -107,7 +107,7 @@ for(int subd = 0; subd < 8; subd++){
 	chan_count = 0;
 }
 
-//cout << ":\t" << tot_cal_count << "\n";
+cout << ":\t" << tot_cal_count << "\n";
 
 	//write all histos to .root file and to .gif files
 	//by default .gif files printing is commented to avoid unwanted output to the terminal - one can uncomment them if needed

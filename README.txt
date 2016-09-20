@@ -123,17 +123,24 @@ ANALYZER:
 	2) Remove all old runs (out  of  interest)  from  file 
 	   list_of_LED_files  -  so,   first   run   in   this  
 	   remaining list wiil be the reference run
-	3) Run Drun_HCAL for first and last runs in  the  list 
+	   +Update list of runs in Nrun_HCALL.C
+	3) Comment/uncomment outputs in Drun_HCAL or Nrun_HCAL
+	   to perform steps 3a) and 3b)
+	3a) Run Drun_HCAL for first and last runs in the  list 
 	   - see how much cells need to be calibrated at all
-	4) Run Nrun_HCAL - see how number  of  cells  wich  is 
+	3b) Run Nrun_HCAL - see how number  of  cells  wich is 
 	   need to be calibrated changes with time
-	5) Check all .gif files appeared in /output  directory
-	6) Use Drun_cell and Nrun_cell to plot gain  of  drift 
+	4) Check all .gif files appeared in /output  directory
+	5) Use Drun_cell and Nrun_cell to plot gain  of  drift 
 	   over time for particular cell
 
+	Root  should  be  called  in   a   batch   mode,   i.e.
+	> root -b -l
+
 	All scripts should be declared in  root  by  executing 
-	> .x "script_name.C"      or      > .L "script_name.C"
-	directories /input and /output should be created
+	> .L "script_name.C"
+
+	Folders /input and /output should be created  manually
 
 
 5. TASKS FOR FURTHER DEVELOPMENT
