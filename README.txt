@@ -117,23 +117,35 @@ ANALYZER:
 4.2 USER MANUAL FOR ANALYZER
 
 	One can use this project as follows:
+
 	1) Make a list of run  of  interest  by  command  like 
 	   > ls -1 /afs/cern.ch/work/k/kodolova/public/RDMweb/
 	   histos/LED_* >> list_of_LED_files
+
 	2) Remove all old runs (out  of  interest)  from  file 
 	   list_of_LED_files  -  so,   first   run   in   this  
 	   remaining list wiil be the reference run
 	   +Update list of runs in Nrun_HCALL.C
-	3) Comment/uncomment outputs in Drun_HCAL or Nrun_HCAL
-	   to perform steps 3a) and 3b)
-	3a) Run Drun_HCAL for first and last runs in the  list 
-	   - see how much cells need to be calibrated at all
-	3b) Run Nrun_HCAL - see how number  of  cells  wich is 
-	   need to be calibrated changes with time
-	4) Check all .gif files appeared in /output  directory
-	5) Use Drun_cell and Nrun_cell to plot gain  of  drift 
-	   over time for particular cell
 
+	3) Check outputs in Nrun_HCAL and Drun_HCAL
+	   performing steps 3a) and 3b)
+	3a) Run Nrun_HCAL - see how total number of cells wich 
+	    are need to be calibrated changes with time
+	3b) Run Drun_HCAL for first and last runs of  interest 
+	   - see what cells need to be calibrated
+
+	>  .x Drun_HCAL.C("272303", "276678", 0.03, false)   \
+	   >> ./output/drun_bad_cells
+
+	   .gif's will be ploted and list of bad cells  appear
+	   in the ./output directory
+
+	4) Check all .gif files appeared in /output  directory
+
+	5) Use Drun_cell and Nrun_cell to plot gain  of  drift 
+	   over time for particular cell from the list
+
+Notes:
 	Root  should  be  called  in   a   batch   mode,   i.e.
 	> root -b -l
 
@@ -144,7 +156,10 @@ ANALYZER:
 
 
 5. TASKS FOR FURTHER DEVELOPMENT
-
+------------------------------------
+0) there are strong need to integrate with a lot of already done work in large RMT project
+	- https://twiki.cern.ch/twiki/bin/viewauth/CMS/HcalRemoteMonitoring
+------------------------------------
 1) add Q > 50 linADC criteria for each cell in reference run
 2) implement purity and stability for monitoring of overal run quality and distinguish drift from fluctuations
 3) implement plot for time evolution of cells of interest within runs of interest

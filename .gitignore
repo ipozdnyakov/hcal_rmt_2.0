@@ -3,6 +3,7 @@
 *.o
 *.png
 *.log
+*.gif
 log*
 runlist*
 fullSrc*

@@ -21,7 +21,7 @@ cout << "\t\tHB1\tHB2\tHB_tot\tHE1\tHE2\tHE3\tHE_tot\tHF1\tHF2\tHF_tot\tHO4\t:\t
 
 	for(int i = 1; i < n_of_runs; i++){
 		cout << i << ") ";
-		Drun_HCAL(runs[0], runs[i], threshold);
+		Drun_HCAL(runs[0], runs[i], threshold, true);
 	}
 
 }

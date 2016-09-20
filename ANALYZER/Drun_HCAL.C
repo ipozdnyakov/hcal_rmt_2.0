@@ -1,6 +1,8 @@
-void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03){
+void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03, bool from_nrun = false){
 
+if(!from_nrun) cout << "Threshold= " << threshold << "\tRefRun= " << run1 << "\tAnalazedRun= ";
 cout << " " << run2 << ":\t";
+if(!from_nrun) cout << "\n";
 
 //declaration of reference and analysed files and TH2D histos for the data from them, declaration of other variables
 
@@ -60,14 +62,14 @@ for(int subd = 0; subd < 8; subd++){
 
 						//output bad cells (and converting from bin nuber to eta)
 
-						//cout << subd << "\t";
+						if(!from_nrun) cout << subd << "\t";
 
 					        if( xi > 41){
-					                //cout << xi - 41 << "\t";
+					                if(!from_nrun) cout << xi - 41 << "\t";
 					        }else{
-					              	//cout << xi - 42 << "\t";
+					              	if(!from_nrun) cout << xi - 42 << "\t";
 					        }
-						//cout << yi << "\n";
+						if(!from_nrun) cout << yi << "\n";
 
 					};
 
@@ -98,7 +100,7 @@ for(int subd = 0; subd < 8; subd++){
 	//output the results for each subdetector X depth
 	
 	if(chan_count > 0){
-		cout << cal_count << "\t";
+		if(from_nrun) cout << cal_count << "\t";
 	}else{
 		cout << "empty_run\t";
 	}
@@ -106,7 +108,7 @@ for(int subd = 0; subd < 8; subd++){
 	// output results for subdetector
 
 	if((subd == 1)||(subd == 4)||(subd == 6)){
-		cout << subd_cal_count << "\t";
+		if(from_nrun) cout << subd_cal_count << "\t";
 		subd_cal_count = 0;
 	}
 
@@ -116,7 +118,7 @@ for(int subd = 0; subd < 8; subd++){
 	chan_count = 0;
 }
 
-cout << ":\t" << tot_cal_count << "\n";
+if(from_nrun) cout << ":\t" << tot_cal_count << "\n";
 
 	//write all histos to .root file and to .gif files
 	//by default .gif files printing is commented to avoid unwanted output to the terminal - one can uncomment them if needed
@@ -126,9 +128,9 @@ cout << ":\t" << tot_cal_count << "\n";
 	for(int i = 0; i < 8; i++){
 		cnvs = new TCanvas(titles[i]);
 		ampl_ratio[i]->Draw("colz");
-//		cnvs->Print("./output/Drun_" + run1 + "_" + run2 + "_2D" + titles[i] + ".gif");
+		if(!from_nrun) cnvs->Print("./output/Drun_" + run1 + "_" + run2 + "_2D" + titles[i] + ".gif");
 		ratio_distr[i]->Draw("");
-//		cnvs->Print("./output/Drun_" + run1 + "_" + run2 + "_1D" + titles[i] + ".gif");
+		if(!from_nrun) cnvs->Print("./output/Drun_" + run1 + "_" + run2 + "_1D" + titles[i] + ".gif");
 		delete cnvs;
 		ampl_ratio[i]->Write();
 		ratio_distr[i]->Write();
