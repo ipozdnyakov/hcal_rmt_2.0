@@ -31,12 +31,10 @@
 		HCALMONITORING/RDMScript/                    \
 		CMSSW807patch2_STABLE/src/RecoHcal/	     \
  
-	ANALYZER  is  a  set  of  "scripts"  for   CINT   ROOT 
-	interpretator. All *.C filese are "script"  files  and 
-	should be run from lxplus with root in batch mode  (to 
-	have acces to /afs/cern.ch/work/k/kodolova/public/   \
-		      RDMweb/histos/)
-	> root -l -b
+	ANALYZER  is  a  set  of  C++  functions  called  from 
+	the main(). Output monitor.exe produced  by  maker_gcc 
+	should  be  run  from  lxplus  - to  have   acces   to 
+	/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/
 
 2.1 INPUT DATA FOR PRODUCER
 
@@ -75,23 +73,23 @@ ANALYZER:
 
 	bad_cells
 	- list of cells for  reading  by  Ncell.C,  output  of 
-	Nrun_HCAL.C
+	Nrun_HCAL()
 
 	/output	
 	- directory for output .root, .gif and text files
 
-	Drun_cell.C		
+	Drun_cell()		
 	- analyse gains for particular pair of runs  and  cell 
 	(run_ref, run_ana,  subd,  ieta,  iphi)  outputs  gain 
 	drift (ratio of gain in _ana run with reagrd  to  _ref 
 	run)
 
-	Nrun_cell.C		
+	Nrun_cell()		
 	- analyse gains for particular cell over all run (subd,
 	ieta,  iphi)  outputs  a  list  of  gain  drifts   for 
 	particular cell over all runs
 
-	Drun_HCAL.C		
+	Drun_HCAL()		
 	- analyse all cells of HCAL  for  particular  pair  of 
 	runs (run_ref, run_ana, threshold)  where  threshold - 
 	is an input for acceptable gain  drift  in  %  outputs 
@@ -99,18 +97,18 @@ ANALYZER:
 	more  than  threshold)  for  each  run  also   outputs 
 	corresponding histos in .root and .gif files
 
-	Nrun_HCAL.C		
+	Nrun_HCAL()		
 	- analyse all cells of HCAL over all runs  (threshold)
 	for each run outputs number of cells which need to  be 
 	calibrated (drift is more than threshold) with  regard 
 	to ref run  (first  run)  also  outputs  corresponding 
 	histos in .root and .gif files
 
-	Ncell.C
+	Ncell()
 	- read list of cells from  ./input/bad_cells  and  run 
 	Nrun_cell.C for each cell
 
-	Choose_subdetector.C	
+	Choose_subdetector()
 	- return name of histogram of interest by  the  number 
 	of subdetector
 
@@ -130,8 +128,8 @@ ANALYZER:
 	2) Remove all old runs (out  of  interest)  from  file 
 	   list_of_LED_files  -  so,   first   run   in   this  
 	   remaining list wiil be the reference run
-	   +Update list of runs in Nrun_HCALL.C
-	   +Update list of runs in Nrun_cell.C
+	   +Update list of runs in Nrun_HCALL()
+	   +Update list of runs in Nrun_cell()
 
 	3) Check outputs in Nrun_HCAL and Drun_HCAL
 	   performing steps 3a) and 3b)
@@ -140,10 +138,10 @@ ANALYZER:
 	3b) Run Drun_HCAL for first and last runs of  interest 
 	   - see what cells need to be calibrated
 
-	>  .x Drun_HCAL.C("272303", "276678", 0.03, false)   \
-	   >> ./output/drun_bad_cells
+//!	>  .x Drun_HCAL.C("272303", "276678", 0.03, false)   \
+//!	   >> ./output/drun_bad_cells
 
-	   .gif's will be ploted and list of bad cells  appear
+	   .gif's will be ploted and list of bad cells appears
 	   in the ./output directory
 
 	4) Check all .gif files appeared in /output  directory
@@ -152,12 +150,8 @@ ANALYZER:
 	   over time for particular cell from the list
 
 Notes:
-	Root  should  be  called  in   a   batch   mode,   i.e.
-	> root -b -l
-
-	All scripts should be declared in  root  by  executing 
-	> .L "script_name.C"
-
+	> ./maker_gcc 		- to compile main()
+	> ./monitor.exe 	- to run
 	Folders /input and /output should be created  manually
 
 
