@@ -4,53 +4,15 @@
 #include<TString.h>
 #include<TFile.h>
 #include<TH2F.h>
+#include"input.h"
 
 using namespace std;
-
-TString Choose_subdetector(int subd);
-void Drun_cell(TString run1, TString run2, int subd, int ieta, int iphi);
-void Nrun_cell(int subd, int ieta, int iphi);
-void Nrun_HCAL(double threshold);
-void Drun_HCAL(TString run1, TString run2, double threshold, bool from_nrun);
-void Cells_evol();
-void Ncell();
-
-//array of runs numbers and total nuber of them
-
-TString runs[] = {
-"271961","272303","272312","272513","272533","272581","272847","272946","272947","273117",
-"273234","273316","273455","273557","273604","273616","273648","273757","273763","273770",
-"273894","273961","274752","274890","275013","275265","275430","275457","275697","275807",
-"275864","276081","276402","276416","276461","276462","276463","276476","276520","276531",
-"276554","276600","276678","277132","277172","277336","277511","278596","278897","279058",
-"279096","279607","279700","279723","279785","279800","279908","280200","280262","280379"
-};
-
-Int_t nruns = sizeof(runs)/sizeof(runs[0]);
-
-TString ref_runs[] = {"271961","271961","271961","271961","271961","272303","272303","272303"};
-
-//arrays of names and numbers of cells in subdetectors
-
-TString subd_depth_name[] = {
-	"h_mapDepth1ADCAmpl_HB",
-	"h_mapDepth2ADCAmpl_HB",
-	"h_mapDepth1ADCAmpl_HE",
-	"h_mapDepth2ADCAmpl_HE",
-	"h_mapDepth3ADCAmpl_HE",
-	"h_mapDepth1ADCAmpl_HF",
-	"h_mapDepth2ADCAmpl_HF",
-	"h_mapDepth4ADCAmpl_HO",
-};
-
-Int_t subd_depth_cells[] = {2304,288,1124,1080,288,864,864,2160};
-Int_t subd_cells[] = {2592,2592,1728,2160};
 
 int main(){
 
 	streambuf *console = cout.rdbuf();
-	ofstream bad_runs("./input/bad_runs");
-	ofstream bad_cells("./input/bad_cells");
+	ofstream bad_runs("./output/bad_runs");
+	ofstream bad_cells("./output/bad_cells");
 
 	Nrun_HCAL(0.05);
 
@@ -100,7 +62,7 @@ void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshol
 	//loop over all subdetectors
 	for(int subd = 0; subd < 8; subd++){
 		run_ref = new TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + ref_runs[subd] + ".root", "READ");
-		hist_name = Choose_subdetector(subd);
+		hist_name = subd_depth_name[subd];
 
 		//if requiered histograms are presented in the LED files - read them
 		if ((ampl_ref[subd] = (TH2F*)run_ref->Get(hist_name))&&(ampl_ana[subd] = (TH2F*)run_ana->Get(hist_name))){
@@ -193,14 +155,14 @@ void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshol
 	//write all histos to .root file and to .gif files
 	//by default .gif files printing is commented to avoid unwanted output to the terminal - one can uncomment them if needed
 
-	TFile *output = new TFile("./output/Drun_" + run1 + "_" + run2 + ".root", "RECREATE");
+	TFile *output = new TFile("./plots/Drun_" + run1 + "_" + run2 + ".root", "RECREATE");
 	TCanvas *cnvs;
 	for(int i = 0; i < 8; i++){
 		cnvs = new TCanvas(titles[i]);
 		ampl_ratio[i]->Draw("colz");
-		if(!from_nrun) cnvs->Print("./output/Drun_" + run1 + "_" + run2 + "_2D" + titles[i] + ".gif");
+		if(!from_nrun) cnvs->Print("./plots/Drun_" + run1 + "_" + run2 + "_2D" + titles[i] + ".gif");
 		ratio_distr[i]->Draw("");
-		if(!from_nrun) cnvs->Print("./output/Drun_" + run1 + "_" + run2 + "_1D" + titles[i] + ".gif");
+		if(!from_nrun) cnvs->Print("./plots/Drun_" + run1 + "_" + run2 + "_1D" + titles[i] + ".gif");
 		delete cnvs;
 		ampl_ratio[i]->Write();
 		ratio_distr[i]->Write();
@@ -211,9 +173,9 @@ void Ncell(){
 
 	int subd = 0, ieta = 0, iphi = 0;
 
-	// for all bad cellc from file ./input/bad_cells
+	// for all bad cellc from file ./output/bad_cells
 
-	FILE *file = fopen("./input/bad_cells","r");
+	FILE *file = fopen("./output/bad_cells","r");
 	
 	while( fscanf(file,"%i %i %i",&subd,&ieta,&iphi) == 3 ){
 		Nrun_cell(subd, ieta, iphi);
@@ -228,7 +190,7 @@ void Cells_evol(){
 //read list of bad cells from file
 
 	FILE *file;
-	file = fopen("/afs/cern.ch/user/i/ivanp/2016_HCAL_gains_monitoring/input/bad_cells","r");
+	file = fopen("/afs/cern.ch/user/i/ivanp/2016_HCAL_gains_monitoring/output/bad_cells","r");
 
 //loop over all bad cells from the file
 
@@ -274,7 +236,7 @@ void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, i
 
 //choosing data (histograms) from files by names according to input subdetector number
 
-	hist_name = Choose_subdetector(subd);
+	hist_name = subd_depth_name[subd];
 
 //reading data from files, normalyzing and calculation of gain drift
 //and output of result
@@ -295,26 +257,4 @@ void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, i
 //	cout << "\n";
 run_ref->Close();
 run_ana->Close();
-}
-
-TString Choose_subdetector(int subd = 0){
-TString hist_name;
-        if (subd == 0){
-                hist_name = "h_mapDepth1ADCAmpl_HB";
-        }else if(subd == 1){
-                hist_name = "h_mapDepth2ADCAmpl_HB";
-        }else if(subd == 2){
-                hist_name = "h_mapDepth1ADCAmpl_HE";
-        }else if(subd == 3){
-                hist_name = "h_mapDepth2ADCAmpl_HE";
-        }else if(subd == 4){
-                hist_name = "h_mapDepth3ADCAmpl_HE";
-        }else if(subd == 5){
-                hist_name = "h_mapDepth1ADCAmpl_HF";
-        }else if(subd == 6){
-                hist_name = "h_mapDepth2ADCAmpl_HF";
-        }else if(subd == 7){
-                hist_name = "h_mapDepth4ADCAmpl_HO";
-        }
-return hist_name;
 }
