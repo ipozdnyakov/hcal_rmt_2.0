@@ -68,9 +68,6 @@ ANALYZER:
 	- directory with list of input  files  and  arrays  of 
 	input runs stored in text files
 
-	list_of_LED_files 
-	- list of files (runs) of interest -- 1 file for 1 run
-
 	bad_cells
 	- list of cells for  reading  by  Ncell.C,  output  of 
 	Nrun_HCAL()
@@ -121,15 +118,12 @@ ANALYZER:
 
 	One can use this project as follows:
 
-	1) Make a list of run  of  interest  by  command  like 
+	1) Make a list of run  of  interest  by  listing  like 
 	   > ls -1 /afs/cern.ch/work/k/kodolova/public/RDMweb/
-	   histos/LED_* >> list_of_LED_files
+	   histos/LED_*
 
-	2) Remove all old runs (out  of  interest)  from  file 
-	   list_of_LED_files  -  so,   first   run   in   this  
-	   remaining list wiil be the reference run
-	   +Update list of runs in Nrun_HCALL()
-	   +Update list of runs in Nrun_cell()
+	2) Correct global array of runs in  main.cpp  -  first   
+	   run in this array wiil be the reference run
 
 	3) Check outputs in Nrun_HCAL and Drun_HCAL
 	   performing steps 3a) and 3b)
@@ -150,7 +144,7 @@ ANALYZER:
 	   over time for particular cell from the list
 
 Notes:
-	> ./maker_gcc 		- to compile main()
+	> ./maker_gcc 		- to compile main() = main.cpp
 	> ./monitor.exe 	- to run
 	Folders /input and /output should be created  manually
 
