@@ -1,9 +1,11 @@
-void Drun_cell(TString run1, TString run2, int subd, int ieta, int iphi);
-void Nrun_cell(int subd, int ieta, int iphi);
-void Nrun_HCAL(double threshold);
-void Drun_HCAL(TString run1, TString run2, double threshold, bool from_nrun);
-void Cells_evol();
+using namespace std;
+
+vector<vector<Int_t> > Nrun_HCAL(double threshold);
+vector<Int_t> Drun_HCAL(TString run1, TString run2, double threshold, bool from_nrun);
+
 void Ncell();
+void Nrun_cell(int subd, int ieta, int iphi);
+void Drun_cell(TString run1, TString run2, int subd, int ieta, int iphi);
 
 //array of runs numbers and total nuber of them
 

@@ -1,5 +1,8 @@
 #include<iostream>
+#include<iomanip>
+#include<cstdio>
 #include<fstream>
+#include<vector>
 #include<TCanvas.h>
 #include<TString.h>
 #include<TFile.h>
@@ -11,13 +14,32 @@ using namespace std;
 int main(){
 
 	streambuf *console = cout.rdbuf();
-	ofstream bad_runs("./output/bad_runs");
-	ofstream bad_cells("./output/bad_cells");
+	ofstream bad_runs_s("./output/bad_runs");
+	ofstream bad_cells_s("./output/bad_cells");
+	ofstream gain_drifts_s("./output/gain_drifts");
 
-	Nrun_HCAL(0.05);
+	vector<vector<Int_t> > bad_runs;
 
-	cout.rdbuf(bad_cells.rdbuf());
+	bad_runs = Nrun_HCAL(0.03);
+
+	cout.rdbuf(bad_runs_s.rdbuf());
+	for(int i = 0; i < bad_runs.size(); i++){
+		for(int j = 0; j < bad_runs[i].size(); j++){
+			cout << bad_runs[i][j] << "\t";
+		}
+		cout << "\n";
+	}
+	bad_runs_s.close();
+	cout.rdbuf(console);
+
+	cout.rdbuf(bad_cells_s.rdbuf());
 	Drun_HCAL(runs[0], runs[nruns-1], 0.05, false);
+	bad_cells_s.close();
+	cout.rdbuf(console);
+
+	cout.rdbuf(gain_drifts_s.rdbuf());
+	Ncell();
+	gain_drifts_s.close();
 	cout.rdbuf(console);
 
         return (EXIT_SUCCESS);
@@ -27,7 +49,10 @@ int main(){
 //BELOW THE SOURCE CODE FOR FUNCTIONS
 //--------------------------------------------------
 
-void Nrun_HCAL(double threshold = 0.03) {
+vector<vector<Int_t> > Nrun_HCAL(double threshold = 0.03) {
+
+	vector<vector<Int_t> > bad_runs;
+	vector<Int_t> bads;
 
 	//cout monitoring parameters and names for columns
 	cout << "RefRun=" << runs[0] << " threshold=" << threshold << ":\n";
@@ -36,11 +61,17 @@ void Nrun_HCAL(double threshold = 0.03) {
 	//loop over all runs
 	for(int i = 0; i < nruns; i++){
 		cout << i << ") ";
-		Drun_HCAL(runs[0], runs[i], threshold, true);
+		bads = Drun_HCAL(runs[0], runs[i], threshold, true);
+		if((bads[1]+bads[2]+bads[3]+bads[4]+bads[5]+bads[6]+bads[7]+bads[8]) > 0) bad_runs.push_back(bads);
 	}
+
+	return bad_runs;
 }
 
-void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03, bool from_nrun = false){
+vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03, bool from_nrun = false){
+
+	vector<Int_t> bads;
+	bads.push_back(271961);
 
 	if(!from_nrun) cout << "Threshold= " << threshold << "\tRefRun= " << run1 << "\tAnalazedRun= ";
 	cout << " " << run2 << ":\t";
@@ -139,6 +170,12 @@ void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshol
 				cout << "empty_run\t";
 			}
 		}
+		//check if run is bad
+		if((double)cal_count/subd_depth_cells[subd] > 0.5){
+			bads.push_back(cal_count);
+		}else{
+			bads.push_back(0);
+		}
 		// output results for subdetector
 		if((subd == 1)||(subd == 4)||(subd == 6)){
 			if(from_nrun) cout << subd_cal_count << "\t";
@@ -167,40 +204,20 @@ void Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshol
 		ampl_ratio[i]->Write();
 		ratio_distr[i]->Write();
 	}
+
+	return bads;
 }
 
 void Ncell(){
 
 	int subd = 0, ieta = 0, iphi = 0;
 
-	// for all bad cellc from file ./output/bad_cells
-
 	FILE *file = fopen("./output/bad_cells","r");
-	
-	while( fscanf(file,"%i %i %i",&subd,&ieta,&iphi) == 3 ){
-		Nrun_cell(subd, ieta, iphi);
-		if(feof(file)) break;
-	}
 
-	cout << "\n";
-}
+     	fscanf(file, "Threshold= %*f RefRun= 271961 AnalazedRun=  280379:");	
 
-void Cells_evol(){
-
-//read list of bad cells from file
-
-	FILE *file;
-	file = fopen("/afs/cern.ch/user/i/ivanp/2016_HCAL_gains_monitoring/output/bad_cells","r");
-
-//loop over all bad cells from the file
-
-	int subd, ieta, iphi;
 	while(!feof(file)){
-     		fscanf(file, "%d\t%d\t%d", &subd, &ieta, &iphi);
-
-	//loop over all runs with regard to the first one
-
-		cout << "Time evol of gain drift for cell in subdetector " << subd << " with ieta=" << ieta << " iphi=" << iphi << " : ";
+     		fscanf(file, "%d %d %d", &subd, &ieta, &iphi);	
 		Nrun_cell(subd, ieta, iphi);
 	}
 }
@@ -209,12 +226,12 @@ void Nrun_cell(int subd, int ieta, int iphi){
 
 //loop over all runs with regard to the first one
 
-	cout << "(" << subd << ";" << ieta << ";" << iphi << ")\t";
+	cout << setw(11) << "(" << subd << ";" << ieta << ";" << iphi << ")\t";
 
 	for(int i = 1; i < nruns; i++){
 		Drun_cell(runs[0], runs[i], subd, ieta, iphi);
 	}
-cout << "\n";
+	cout << "\n";
 }
 
 void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, int ieta = 0, int iphi = 0){
@@ -249,7 +266,7 @@ void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, i
 
 		if (ampl_ref->GetBinContent(ieta, iphi) != 0.){
 			drift = ampl_ana->GetBinContent(ieta, iphi)/ampl_ref->GetBinContent(ieta, iphi);
-			cout << drift << "\t";
+			cout << setw(8) << drift << "\t";
 		}else{
 			cout << "ref_to_zero\t";
 		}
