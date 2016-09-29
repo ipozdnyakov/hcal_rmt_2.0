@@ -64,16 +64,24 @@ PRODUCER:
 
 ANALYZER:
 
-	/input	
+	/plots	
+	- directory for output .root and .gif files
+
+	/output	
 	- directory with list of input  files  and  arrays  of 
 	input runs stored in text files
 
-	bad_cells
-	- list of cells for  reading  by  Ncell.C,  output  of 
-	Nrun_HCAL()
+	----bad_runs
+		- list of runs with abnormal high drifting, output  of 
+		Nrun_HCAL()
 
-	/output	
-	- directory for output .root, .gif and text files
+	----bad_cells
+		- list of cells for  reading  by  Ncell(),  output  of 
+		Drun_HCAL()
+
+	----gain_drifts
+		- time evolution of  gains  from  the  bad_cells  list
+		  output  of Ncell()
 
 	Drun_cell()		
 	- analyse gains for particular pair of runs  and  cell 
@@ -102,8 +110,8 @@ ANALYZER:
 	histos in .root and .gif files
 
 	Ncell()
-	- read list of cells from  ./input/bad_cells  and  run 
-	Nrun_cell.C for each cell
+	- read list of cells from  ./output/bad_cells  and  run 
+	Nrun_cell() for each cell
 
 	Choose_subdetector()
 	- return name of histogram of interest by  the  number 
@@ -126,22 +134,17 @@ ANALYZER:
 	   run in this array wiil be the reference run
 
 	3) Check outputs in Nrun_HCAL and Drun_HCAL
-	   performing steps 3a) and 3b)
+	   performing steps 3a),3b) and 3b) in code of main():
+
 	3a) Run Nrun_HCAL - see how total number of cells wich 
-	    are need to be calibrated changes with time
+	   are need to be calibrated changes with time
 	3b) Run Drun_HCAL for first and last runs of  interest 
 	   - see what cells need to be calibrated
-
-//!	>  .x Drun_HCAL.C("272303", "276678", 0.03, false)   \
-//!	   >> ./output/drun_bad_cells
-
-	   .gif's will be ploted and list of bad cells appears
-	   in the ./output directory
-
-	4) Check all .gif files appeared in /output  directory
-
-	5) Use Drun_cell and Nrun_cell to plot gain  of  drift 
-	   over time for particular cell from the list
+	   list of bad cells appears in the ./output directory
+	   plot all .gif files appeared  in  /plots  directory
+	3c) Run Ncell() to get file  gain_drifts   in  /output
+	   this is drift over time for  particular  cell  from
+	   the list of bad cells
 
 Notes:
 	> ./maker_gcc 		- to compile main() = main.cpp
@@ -151,6 +154,8 @@ Notes:
 
 5. TASKS FOR FURTHER DEVELOPMENT
 ------------------------------------
+-2) Change TString to Int_t for run number and fix the naming of reference ran in Drun_HCAL(), fix number for list of bad runs
+-1) Change criteria for bad runs X bad cells and shield information from bad sources
 0) there are strong need to integrate with a lot of already done work in large RMT project
 	- https://twiki.cern.ch/twiki/bin/viewauth/CMS/HcalRemoteMonitoring
 ------------------------------------
