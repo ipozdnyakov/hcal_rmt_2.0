@@ -1,0 +1,3 @@
+#!/bin/tcsh
+g++ -o monitor.exe main.cpp `root-config --cflags --glibs --libs`
+
