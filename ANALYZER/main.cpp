@@ -70,6 +70,10 @@ vector<vector<Int_t> > Nrun_HCAL(double threshold = 0.03) {
 
 vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03, bool from_nrun = false){
 
+	bool contrast = true; //set for drift > 1+threshold high value (1.2),
+			      //for for < 1-threshold low value (0.8)
+			      // make plots more contrast
+
 	vector<Int_t> bads;
 	bads.push_back(271961);
 
@@ -120,6 +124,10 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 						//analysing if drift beyond the threshold
 						if( fabs(drift - 1) > threshold){
 
+							if(contrast){
+								if(drift > (1 + threshold)) ampl_ratio[subd]->SetBinContent(xi, yi, 1.2);
+								if(drift < (1 - threshold)) ampl_ratio[subd]->SetBinContent(xi, yi, 0.8);
+							}
 							//increase counters for channels what need to be calibrated
 							cal_count++;
 
