@@ -1,3 +1,5 @@
+#ifndef _INPUT_H
+#define _INPUT_H
 using namespace std;
 
 vector<vector<Int_t> > Nrun_HCAL(double threshold);
@@ -37,3 +39,5 @@ TString subd_depth_name[] = {
 
 Int_t subd_depth_cells[] = {2304,288,1124,1080,288,864,864,2160};
 Int_t subd_cells[] = {2592,2592,1728,2160};
+
+#endif  /* _INPUT_H */
