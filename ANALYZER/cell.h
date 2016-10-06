@@ -6,22 +6,23 @@
 using namespace std;
 
 class Cell {
-//Event is a set of jets and parameters
+
 private:
 	vector<int> event_count;
-	int run_count = 0;
+	int run_count;
 public:
-	int subd = -1, depth = -1, eta = 0, phi = -1;
-	TSTring subd_name = "not defined";
+	int subd, depth, eta, phi;
+	TString subd_name;
 
-	vector<TH1D> gain;	 	
+	vector<TH1D> sum_ampl;	 	
 	vector<double> drift;	 	
-	bool change_trend = false;
+	bool change_trend;
 
-	Cell(int subd, int eta, int phi): subd(subd), eta(eta), phi(phi) { }
-	Cell(TString subd_name, int depth, int eta, int phi): subd_name(subd_name), depth(depth), eta(eta), phi(phi) { }
+	Cell();
+	Cell(int subd, int eta, int phi);
+	Cell(TString subd_name, int depth, int eta, int phi);
 
-	void AddEvent();
+	void AddEvent(double);
 	void AddRun();
 };
 #endif	/* _CELL_H */

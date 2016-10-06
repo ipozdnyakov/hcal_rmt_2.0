@@ -154,8 +154,9 @@ Notes:
 
 5. TASKS FOR FURTHER DEVELOPMENT
 ------------------------------------
--2) Change TString to Int_t for run number and fix the naming of reference ran in Drun_HCAL(), fix number for list of bad runs
+-2) Change TString to Int_t for run number and fix the naming of reference ran in Drun_HCAL(), fix numbers for list of bad runs
 -1) Change criteria for bad runs X bad cells and shield information from bad sources
+-0.5) If separate classes to corresponding .h and .cpp files one need use Singleton pattern instead global input.h
 0) there are strong need to integrate with a lot of already done work in large RMT project
 	- https://twiki.cern.ch/twiki/bin/viewauth/CMS/HcalRemoteMonitoring
 ------------------------------------

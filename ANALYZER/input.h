@@ -5,7 +5,7 @@ using namespace std;
 vector<vector<Int_t> > Nrun_HCAL(double threshold);
 vector<Int_t> Drun_HCAL(TString run1, TString run2, double threshold, bool from_nrun);
 
-void Ncell();
+void Ncell(TString);
 void Nrun_cell(int subd, int ieta, int iphi);
 void Drun_cell(TString run1, TString run2, int subd, int ieta, int iphi);
 
@@ -37,7 +37,9 @@ TString subd_depth_name[] = {
 	"h_mapDepth4ADCAmpl_HO",
 };
 
+int subd_depth[] = {1,2,1,2,3,1,2,4};
+
 Int_t subd_depth_cells[] = {2304,288,1124,1080,288,864,864,2160};
-Int_t subd_cells[] = {2592,2592,1728,2160};
+Int_t subd_cells[] = {2592,2592,1728,2160}; //total 9072
 
 #endif  /* _INPUT_H */

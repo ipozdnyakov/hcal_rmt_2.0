@@ -7,7 +7,9 @@
 #include<TString.h>
 #include<TFile.h>
 #include<TH2F.h>
+
 #include"input.h"
+#include"cell.h"
 
 using namespace std;
 
@@ -17,6 +19,7 @@ int main(){
 	ofstream bad_runs_s("./output/bad_runs");
 	ofstream bad_cells_s("./output/bad_cells");
 	ofstream gain_drifts_s("./output/gain_drifts");
+	ofstream gain_drifts_interest_s("./output/gain_drifts_interest");
 
 	vector<vector<Int_t> > bad_runs;
 
@@ -37,9 +40,15 @@ int main(){
 	bad_cells_s.close();
 	cout.rdbuf(console);
 
+
 	cout.rdbuf(gain_drifts_s.rdbuf());
-	Ncell();
+	Ncell("bad_cells");
 	gain_drifts_s.close();
+	cout.rdbuf(console);
+
+	cout.rdbuf(gain_drifts_interest_s.rdbuf());
+	Ncell("cells_of_interest");
+	gain_drifts_interest_s.close();
 	cout.rdbuf(console);
 
         return (EXIT_SUCCESS);
@@ -216,11 +225,11 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 	return bads;
 }
 
-void Ncell(){
+void Ncell(TString file_name){
 
 	int subd = 0, ieta = 0, iphi = 0;
 
-	FILE *file = fopen("./output/bad_cells","r");
+	FILE *file = fopen("./output/"+file_name,"r");
 
      	fscanf(file, "Threshold= %*f RefRun= 271961 AnalazedRun=  280379:");	
 
@@ -282,4 +291,39 @@ void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, i
 //	cout << "\n";
 run_ref->Close();
 run_ana->Close();
+}
+
+//-----------------------|
+//class Cell:: definition|
+//-----------------------|
+
+Cell::Cell():run_count(0), change_trend(false){}
+
+Cell::Cell(int subd, int eta, int phi):
+subd(subd), eta(eta), phi(phi), run_count(0), change_trend(false){
+
+	if((subd < 0)||(subd > 7)) cout << "HCAL Error: There are only 8 subdetectors from 0 - HB1 to 7 - HO4\n";
+	subd_name = subd_depth_name[subd];
+	depth = subd_depth[subd];
+
+}
+
+Cell::Cell(TString subd_name, int depth, int eta, int phi): 
+subd_name(subd_name), depth(depth), eta(eta), phi(phi), run_count(0), change_trend(false){
+
+	for(int i = 0; i < 8; i++){
+		if(subd_name == subd_depth_name[i]) subd = i;
+	}
+
+}
+
+void Cell::AddEvent(double sum_TS){
+	event_count[run_count - 1]++;
+	sum_ampl[run_count - 1].Fill(sum_TS);
+}
+
+void Cell::AddRun(){
+	run_count++;
+	event_count.push_back(0);
+	sum_ampl.push_back(TH1D("","",1000,0,10000));
 }
