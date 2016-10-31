@@ -40,7 +40,6 @@ int main(){
 	bad_cells_s.close();
 	cout.rdbuf(console);
 
-
 	cout.rdbuf(gain_drifts_s.rdbuf());
 	Ncell("bad_cells");
 	gain_drifts_s.close();
@@ -231,7 +230,7 @@ void Ncell(TString file_name){
 
 	FILE *file = fopen("./output/"+file_name,"r");
 
-     	fscanf(file, "Threshold= %*f RefRun= 271961 AnalazedRun=  280379:");	
+     	fscanf(file, "Threshold= %*f RefRun= 271961 AnalazedRun=  "+ runs[nruns-1] + ":");	
 
 	while(!feof(file)){
      		fscanf(file, "%d %d %d", &subd, &ieta, &iphi);	
