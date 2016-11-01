@@ -19,7 +19,7 @@ int main(){
 	ofstream bad_runs_s("./output/bad_runs");
 	ofstream bad_cells_s("./output/bad_cells");
 	ofstream gain_drifts_s("./output/gain_drifts");
-	ofstream gain_drifts_interest_s("./output/gain_drifts_interest");
+	ofstream gain_drifts_interest_s("./output/gain_drift_cells_for_PHISYM_comparison_HE1n");
 
 	vector<vector<Int_t> > bad_runs;
 
@@ -46,7 +46,7 @@ int main(){
 	cout.rdbuf(console);
 
 	cout.rdbuf(gain_drifts_interest_s.rdbuf());
-	Ncell("cells_of_interest");
+	Ncell("cells_for_PHISYM_comparison_HE1n");
 	gain_drifts_interest_s.close();
 	cout.rdbuf(console);
 
@@ -234,7 +234,9 @@ void Ncell(TString file_name){
 
 	while(!feof(file)){
      		fscanf(file, "%d %d %d", &subd, &ieta, &iphi);	
-		Nrun_cell(subd, ieta, iphi);
+		//Nrun_cell(subd, ieta, iphi);
+		Drun_cell(runs[0], runs[nruns-1], subd, ieta, iphi);
+		cout << "\n";
 	}
 }
 

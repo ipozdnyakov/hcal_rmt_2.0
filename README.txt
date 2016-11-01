@@ -131,7 +131,7 @@ ANALYZER:
 	   histos/LED_*
 
 	2) Correct global array of runs in  main.cpp  -  first   
-	   run in this array wiil be the reference run
+	   run in this array will be the reference run
 
 	3) Check outputs in Nrun_HCAL and Drun_HCAL
 	   performing steps 3a),3b) and 3b) in code of main():
@@ -156,7 +156,6 @@ Notes:
 ------------------------------------
 -2) Change TString to Int_t for run number and fix the naming of reference ran in Drun_HCAL(), fix numbers for list of bad runs
 -1) Change criteria for bad runs X bad cells and shield information from bad sources
--0.5) If separate classes to corresponding .h and .cpp files one need use Singleton pattern instead global input.h
 0) there are strong need to integrate with a lot of already done work in large RMT project
 	- https://twiki.cern.ch/twiki/bin/viewauth/CMS/HcalRemoteMonitoring
 ------------------------------------
