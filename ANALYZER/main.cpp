@@ -19,7 +19,7 @@ int main(){
 	ofstream bad_runs_s("./output/bad_runs");
 	ofstream bad_cells_s("./output/bad_cells");
 	ofstream gain_drifts_s("./output/gain_drifts");
-	ofstream gain_drifts_interest_s("./output/gain_drift_cells_for_PHISYM_comparison_HE1n");
+	ofstream gain_drifts_interest_s("./output/gain_drift_cells_for_PHISYM_comparison_HE1p");
 
 	vector<vector<Int_t> > bad_runs;
 
@@ -46,7 +46,7 @@ int main(){
 	cout.rdbuf(console);
 
 	cout.rdbuf(gain_drifts_interest_s.rdbuf());
-	Ncell("cells_for_PHISYM_comparison_HE1n");
+	Ncell("cells_for_PHISYM_comparison_HE1p");
 	gain_drifts_interest_s.close();
 	cout.rdbuf(console);
 
