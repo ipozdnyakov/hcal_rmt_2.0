@@ -19,12 +19,15 @@ int main(){
 	ofstream bad_runs_s("./output/bad_runs");
 	ofstream bad_cells_s("./output/bad_cells");
 	ofstream gain_drifts_s("./output/gain_drifts");
-	ofstream gain_drifts_interest_s("./output/gain_drift_cells_for_PHISYM_comparison_HE1p");
+	ofstream gain_drifts_interest_s("./output/gain_drift_cells_of_interest");
 
+	//return vector of vectors with number of bad cells for each run for each subdetector
+	//only for runs with atleast 1 subdetector has more than 50% bad cells
 	vector<vector<Int_t> > bad_runs;
-
 	bad_runs = Nrun_HCAL(0.03);
 
+
+	//print list of bad runs into file
 	cout.rdbuf(bad_runs_s.rdbuf());
 	for(int i = 0; i < bad_runs.size(); i++){
 		for(int j = 0; j < bad_runs[i].size(); j++){
@@ -46,7 +49,7 @@ int main(){
 	cout.rdbuf(console);
 
 	cout.rdbuf(gain_drifts_interest_s.rdbuf());
-	Ncell("cells_for_PHISYM_comparison_HE1p");
+	Ncell("cells_of_interest");
 	gain_drifts_interest_s.close();
 	cout.rdbuf(console);
 
@@ -69,6 +72,7 @@ vector<vector<Int_t> > Nrun_HCAL(double threshold = 0.03) {
 	//loop over all runs
 	for(int i = 0; i < nruns; i++){
 		cout << i << ") ";
+		//return vector of number of bad cells in each subdetector
 		bads = Drun_HCAL(runs[0], runs[i], threshold, true);
 		if((bads[1]+bads[2]+bads[3]+bads[4]+bads[5]+bads[6]+bads[7]+bads[8]) > 0) bad_runs.push_back(bads);
 	}
@@ -78,8 +82,8 @@ vector<vector<Int_t> > Nrun_HCAL(double threshold = 0.03) {
 
 vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03, bool from_nrun = false){
 
-	bool contrast = true; //set for drift > 1+threshold high value (1.2),
-			      //for for < 1-threshold low value (0.8)
+	bool contrast = true; // set for drift > 1+threshold high value (1.2),
+			      // for for < 1-threshold low value (0.8)
 			      // make plots more contrast
 
 	vector<Int_t> bads;
@@ -221,6 +225,8 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 		ratio_distr[i]->Write();
 	}
 
+	run_ref->Close();
+	run_ana->Close();
 	return bads;
 }
 
@@ -234,8 +240,8 @@ void Ncell(TString file_name){
 
 	while(!feof(file)){
      		fscanf(file, "%d %d %d", &subd, &ieta, &iphi);	
-		//Nrun_cell(subd, ieta, iphi);
-		Drun_cell(runs[0], runs[nruns-1], subd, ieta, iphi);
+		Nrun_cell(subd, ieta, iphi);
+		//Drun_cell(runs[0], runs[nruns-1], subd, ieta, iphi);
 		cout << "\n";
 	}
 }
@@ -289,7 +295,7 @@ void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, i
 			cout << "ref_to_zero\t";
 		}
 	}
-//	cout << "\n";
+
 run_ref->Close();
 run_ana->Close();
 }

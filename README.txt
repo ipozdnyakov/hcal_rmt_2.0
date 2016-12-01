@@ -130,7 +130,7 @@ ANALYZER:
 	   > ls -1 /afs/cern.ch/work/k/kodolova/public/RDMweb/
 	   histos/LED_*
 
-	2) Correct global array of runs in  main.cpp  -  first   
+	2) Correct global array of runs  in  input.h  -  first   
 	   run in this array will be the reference run
 
 	3) Check outputs in Nrun_HCAL and Drun_HCAL
