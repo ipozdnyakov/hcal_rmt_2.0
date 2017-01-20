@@ -20,12 +20,17 @@ int main(){
 	ofstream bad_cells_s("./output/bad_cells");
 	ofstream gain_drifts_s("./output/gain_drifts");
 	ofstream gain_drifts_interest_s("./output/gain_drift_cells_of_interest");
+	ofstream gain_drifts_HB_s("./output/gain_drift_HB");
+	ofstream gain_drifts_HE_s("./output/gain_drift_HE");
+	ofstream gain_drifts_HF_s("./output/gain_drift_HF");
+	ofstream gain_drifts_HO_s("./output/gain_drift_HO");
 
 	//return vector of vectors with number of bad cells for each run for each subdetector
 	//only for runs with atleast 1 subdetector has more than 50% bad cells
 	vector<vector<Int_t> > bad_runs;
-	bad_runs = Nrun_HCAL(0.03);
+	bad_runs = Nrun_HCAL(0.05);
 
+cout << "Bad runs are found\n";
 
 	//print list of bad runs into file
 	cout.rdbuf(bad_runs_s.rdbuf());
@@ -38,20 +43,57 @@ int main(){
 	bad_runs_s.close();
 	cout.rdbuf(console);
 
+cout << "Bad runs are written\n";
+
 	cout.rdbuf(bad_cells_s.rdbuf());
 	Drun_HCAL(runs[0], runs[nruns-1], 0.05, false);
 	bad_cells_s.close();
 	cout.rdbuf(console);
+
+cout << "Bad cells are found\n";
 
 	cout.rdbuf(gain_drifts_s.rdbuf());
 	Ncell("bad_cells");
 	gain_drifts_s.close();
 	cout.rdbuf(console);
 
-	cout.rdbuf(gain_drifts_interest_s.rdbuf());
+cout << "Bad cells are done\n";
+
+/*	cout.rdbuf(gain_drifts_interest_s.rdbuf());
 	Ncell("cells_of_interest");
 	gain_drifts_interest_s.close();
 	cout.rdbuf(console);
+
+cout << "Cells of interest done\n";*/
+
+	cout.rdbuf(gain_drifts_HB_s.rdbuf());
+	Ncell("cells_of_HB");
+	gain_drifts_HB_s.close();
+	cout.rdbuf(console);
+
+cout << "HB is done\n";
+
+	cout.rdbuf(gain_drifts_HE_s.rdbuf());
+	Ncell("cells_of_HE");
+	gain_drifts_HE_s.close();
+	cout.rdbuf(console);
+
+cout << "HE is done\n";
+
+	cout.rdbuf(gain_drifts_HF_s.rdbuf());
+	Ncell("cells_of_HF");
+	gain_drifts_HF_s.close();
+	cout.rdbuf(console);
+
+cout << "HF is done\n";
+
+	cout.rdbuf(gain_drifts_HO_s.rdbuf());
+	Ncell("cells_of_HO");
+	gain_drifts_HO_s.close();
+	cout.rdbuf(console);
+
+cout << "HO is done\n";
+
 
         return (EXIT_SUCCESS);
 }
@@ -87,7 +129,7 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 			      // make plots more contrast
 
 	vector<Int_t> bads;
-	bads.push_back(271961);
+	bads.push_back(1);
 
 	if(!from_nrun) cout << "Threshold= " << threshold << "\tRefRun= " << run1 << "\tAnalazedRun= ";
 	cout << " " << run2 << ":\t";
@@ -140,9 +182,9 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 								if(drift > (1 + threshold)) ampl_ratio[subd]->SetBinContent(xi, yi, 1.2);
 								if(drift < (1 - threshold)) ampl_ratio[subd]->SetBinContent(xi, yi, 0.8);
 							}
+
 							//increase counters for channels what need to be calibrated
 							cal_count++;
-
 							//output bad cells (and converting from bin nuber to eta)
 							if(!from_nrun) cout << subd << "\t";
 						        if( xi > 41){
@@ -210,7 +252,6 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 	if(from_nrun) cout << ":\t" << tot_cal_count << "\n";
 
 	//write all histos to .root file and to .gif files
-	//by default .gif files printing is commented to avoid unwanted output to the terminal - one can uncomment them if needed
 
 	TFile *output = new TFile("./plots/Drun_" + run1 + "_" + run2 + ".root", "RECREATE");
 	TCanvas *cnvs;
@@ -227,12 +268,15 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 
 	run_ref->Close();
 	run_ana->Close();
+	output->Close();
+	delete output;
 	return bads;
 }
 
 void Ncell(TString file_name){
 
 	int subd = 0, ieta = 0, iphi = 0;
+	vector<vector<double> > drifts;
 
 	FILE *file = fopen("./output/"+file_name,"r");
 
@@ -240,25 +284,67 @@ void Ncell(TString file_name){
 
 	while(!feof(file)){
      		fscanf(file, "%d %d %d", &subd, &ieta, &iphi);	
-		Nrun_cell(subd, ieta, iphi);
+		drifts.push_back(Nrun_cell(subd, ieta, iphi));
 		//Drun_cell(runs[0], runs[nruns-1], subd, ieta, iphi);
-		cout << "\n";
+		//cout << "\n";
 	}
+
+	TFile   *out  = new TFile("./plots/HCAL_evol_" + file_name + ".root", "RECREATE");
+	TCanvas *cnvs =  new TCanvas("HCAL_evol");
+	TH1D	*evol; 
+	TString name = "cell_";
+	int color = 1;
+
+	for(int i = 0; i < drifts.size(); i++){
+		color = i%50;
+		if((color == 0)||(color == 10)||(color == 19)) color = 2;
+		evol = new TH1D("Gain_Drifts","Gain_Drifts", nruns, 0, nruns);
+		evol->Sumw2();
+		evol->SetStats(0);
+		name += i;
+		evol->SetTitle("");
+		evol->SetName(name);
+		name = "cell_";
+		evol->SetLineColor(color);
+		evol->SetLineWidth(1);
+		evol->SetMarkerColor(color);
+		evol->SetMarkerStyle(7);
+		for(int j = 0; j < drifts[i].size(); j++){
+			evol->Fill(j+0.5, drifts[i][j]);
+			if(j%4 == 0){
+				evol->GetXaxis()->SetBinLabel(j+1,dates[j]);
+			}else{
+				evol->GetXaxis()->SetBinLabel(j+1,"");
+			}
+		}
+		evol->DrawClone("samehistp0l");
+		evol->Write();
+		delete evol;
+	}
+	cnvs->Write();
+	delete out;
 }
 
-void Nrun_cell(int subd, int ieta, int iphi){
+vector<double> Nrun_cell(int subd, int ieta, int iphi){
 
 //loop over all runs with regard to the first one
 
+	vector<double> drifts;
+
 	cout << setw(11) << "(" << subd << ";" << ieta << ";" << iphi << ")\t";
 
-	for(int i = 1; i < nruns; i++){
-		Drun_cell(runs[0], runs[i], subd, ieta, iphi);
+	double drift = 0.;
+
+	for(int i = 0; i < nruns; i++){
+		drift = Drun_cell(runs[0], runs[i], subd, ieta, iphi);
+		drifts.push_back(drift);
 	}
 	cout << "\n";
+	
+	return drifts;
 }
 
-void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, int ieta = 0, int iphi = 0){
+double Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, int ieta = 0, int iphi = 0){
 
 //position of a cell in eta is translated to the bin number
 
@@ -282,7 +368,7 @@ void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, i
 //reading data from files, normalyzing and calculation of gain drift
 //and output of result
 
-	double drift = 0.;
+	double drift = 1.;
 
 	if ((ampl_ref = (TH2F*)run_ref->Get(hist_name))&&(ampl_ana = (TH2F*)run_ana->Get(hist_name))){
 		ampl_ana->Scale(1./ampl_ana->GetEntries());
@@ -290,14 +376,23 @@ void Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, i
 
 		if (ampl_ref->GetBinContent(ieta, iphi) != 0.){
 			drift = ampl_ana->GetBinContent(ieta, iphi)/ampl_ref->GetBinContent(ieta, iphi);
+			if((drift > 0.8)&&(drift < 1.2)){
 			cout << setw(8) << drift << "\t";
+			}else{
+			cout << setw(8) << "%%%" << "\t";
+			drift = 1;
+			}
 		}else{
 			cout << "ref_to_zero\t";
+			drift = 1;
 		}
 	}
 
 run_ref->Close();
 run_ana->Close();
+delete run_ref;
+delete run_ana;
+return drift;
 }
 
 //-----------------------|
