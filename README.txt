@@ -154,18 +154,13 @@ Notes:
 
 5. TASKS FOR FURTHER DEVELOPMENT
 ------------------------------------
--2) Change TString to Int_t for run number and fix the naming of reference ran in Drun_HCAL(), fix numbers for list of bad runs
--1) Change criteria for bad runs X bad cells and shield information from bad sources
 0) there are strong need to integrate with a lot of already done work in large RMT project
 	- https://twiki.cern.ch/twiki/bin/viewauth/CMS/HcalRemoteMonitoring
 ------------------------------------
 1) add Q > 50 linADC criteria for each cell in reference run
 2) implement purity and stability for monitoring of overal run quality and distinguish drift from fluctuations
-3) implement plot for time evolution of cells of interest within runs of interest
-4) implement high_threshold and low_threshold to distinguish drift from faults
-5) define places/sites for permanent storage of input LED files (output of VeRawAnalyzer) and output files with histos and plots of gain drifts
-6) add list of bad runs in /input (make also list of good runs and information for them - date, N_of_events, processed or not, B field, ...)
-7) make procedure of defining Magnet_on and Magnet_off LED runs clear in README.txt (run summary and RMT table)
+3) define places/sites for permanent storage of input LED files (output of VeRawAnalyzer) and output files with histos and plots of gain drifts
+4) make procedure of defining Magnet_on and Magnet_off LED runs clear in README.txt (run summary and RMT table)
 ------------------------------------
 1) create simple, universal and lightweighted analyzer for local runs with only tree and few histos in output
 2) create procedures and documentation for using analyzer, getting input and storing output files

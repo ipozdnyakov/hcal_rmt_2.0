@@ -46,7 +46,7 @@ cout << "Bad runs are found\n";
 cout << "Bad runs are written\n";
 
 	cout.rdbuf(bad_cells_s.rdbuf());
-	Drun_HCAL(runs[0], runs[nruns-1], 0.05, false);
+	Drun_HCAL(0, nruns-1, 0.05, false);
 	bad_cells_s.close();
 	cout.rdbuf(console);
 
@@ -115,29 +115,29 @@ vector<vector<Int_t> > Nrun_HCAL(double threshold = 0.03) {
 	for(int i = 0; i < nruns; i++){
 		cout << i << ") ";
 		//return vector of number of bad cells in each subdetector
-		bads = Drun_HCAL(runs[0], runs[i], threshold, true);
+		bads = Drun_HCAL(0, i, threshold, true);
 		if((bads[1]+bads[2]+bads[3]+bads[4]+bads[5]+bads[6]+bads[7]+bads[8]) > 0) bad_runs.push_back(bads);
 	}
 
 	return bad_runs;
 }
 
-vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double threshold = 0.03, bool from_nrun = false){
+vector<Int_t> Drun_HCAL(int run1_i = 0, int run2_i = 1, double threshold = 0.03, bool from_nrun = false){
 
 	bool contrast = true; // set for drift > 1+threshold high value (1.2),
 			      // for for < 1-threshold low value (0.8)
 			      // make plots more contrast
 
 	vector<Int_t> bads;
-	bads.push_back(1);
+	bads.push_back(runs_numbers[run2_i]);
 
-	if(!from_nrun) cout << "Threshold= " << threshold << "\tRefRun= " << run1 << "\tAnalazedRun= ";
-	cout << " " << run2 << ":\t";
+	if(!from_nrun) cout << "Threshold= " << threshold << "\tRefRun= " << runs[run1_i] << "\tAnalazedRun= ";
+	cout << " " << runs[run2_i] << ":\t";
 	if(!from_nrun) cout << "\n";
 
 	//declaration of reference and analysed files and TH2D histos for the data from them, declaration of other variables
-	TFile *run_ref;// = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + run1 + ".root", "READ");
-	TFile *run_ana = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + run2 + ".root", "READ");
+	TFile *run_ref;// = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run1_i] + ".root", "READ");
+	TFile *run_ana = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run2_i] + ".root", "READ");
 	TH2F	*ampl_ref[8], *ampl_ana[8], *ampl_ratio[8];
 	TH1F	*ratio_distr[8];
 	int chan_count = 0; 		//all channels
@@ -219,9 +219,9 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 		subd_cal_count += cal_count;
 
 		//output the results for each subdetector X depth
-		if(run2 <= ref_runs[subd]){
-				if((from_nrun)&&(run2 < ref_runs[subd])) cout << "---\t";
-				if((from_nrun)&&(run2 == ref_runs[subd])) cout << "ref\t";
+		if(runs[run2_i] <= ref_runs[subd]){
+				if((from_nrun)&&(runs[run2_i] < ref_runs[subd])) cout << "---\t";
+				if((from_nrun)&&(runs[run2_i] == ref_runs[subd])) cout << "ref\t";
 				tot_cal_count -= cal_count;
 				subd_cal_count -= cal_count;
 				cal_count = 0;
@@ -253,14 +253,14 @@ vector<Int_t> Drun_HCAL(TString run1 = "271961", TString run2 = "276678", double
 
 	//write all histos to .root file and to .gif files
 
-	TFile *output = new TFile("./plots/Drun_" + run1 + "_" + run2 + ".root", "RECREATE");
+	TFile *output = new TFile("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + ".root", "RECREATE");
 	TCanvas *cnvs;
 	for(int i = 0; i < 8; i++){
 		cnvs = new TCanvas(titles[i]);
 		ampl_ratio[i]->Draw("colz");
-		if(!from_nrun) cnvs->Print("./plots/Drun_" + run1 + "_" + run2 + "_2D" + titles[i] + ".gif");
+		if(!from_nrun) cnvs->Print("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + "_2D" + titles[i] + ".gif");
 		ratio_distr[i]->Draw("");
-		if(!from_nrun) cnvs->Print("./plots/Drun_" + run1 + "_" + run2 + "_1D" + titles[i] + ".gif");
+		if(!from_nrun) cnvs->Print("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + "_1D" + titles[i] + ".gif");
 		delete cnvs;
 		ampl_ratio[i]->Write();
 		ratio_distr[i]->Write();
@@ -336,7 +336,7 @@ vector<double> Nrun_cell(int subd, int ieta, int iphi){
 	double drift = 0.;
 
 	for(int i = 0; i < nruns; i++){
-		drift = Drun_cell(runs[0], runs[i], subd, ieta, iphi);
+		drift = Drun_cell(0, i, subd, ieta, iphi);
 		drifts.push_back(drift);
 	}
 	cout << "\n";
@@ -344,7 +344,7 @@ vector<double> Nrun_cell(int subd, int ieta, int iphi){
 	return drifts;
 }
 
-double Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0, int ieta = 0, int iphi = 0){
+double Drun_cell(int run1_i = 0, int run2_i = 1, int subd = 0, int ieta = 0, int iphi = 0){
 
 //position of a cell in eta is translated to the bin number
 
@@ -356,8 +356,8 @@ double Drun_cell(TString run1 = "271961", TString run2 = "273961", int subd = 0,
 
 //declaration of reference and analysed files and TH2D histos for the data from them
 
-	TFile *run_ref = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + run1 + ".root", "READ");
-	TFile *run_ana = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + run2 + ".root", "READ");
+	TFile *run_ref = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run1_i] + ".root", "READ");
+	TFile *run_ana = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run2_i] + ".root", "READ");
 	TH2F  *ampl_ref, *ampl_ana;
 	TString	hist_name;
 
