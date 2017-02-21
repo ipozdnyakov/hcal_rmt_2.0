@@ -165,3 +165,6 @@ Notes:
 1) create simple, universal and lightweighted analyzer for local runs with only tree and few histos in output
 2) create procedures and documentation for using analyzer, getting input and storing output files
 3) create postprocessor for output of analyzer, which plot maps and evolution curves, gives permanent list of gains drifts
+
+
+LAST CHECK: 21.02.2017
