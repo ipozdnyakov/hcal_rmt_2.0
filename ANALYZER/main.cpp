@@ -136,8 +136,13 @@ vector<Int_t> Drun_HCAL(int run1_i = 0, int run2_i = 1, double threshold = 0.03,
 	if(!from_nrun) cout << "\n";
 
 	//declaration of reference and analysed files and TH2D histos for the data from them, declaration of other variables
-	TFile *run_ref;// = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run1_i] + ".root", "READ");
+	TFile *run_ref[8];
+	for(int subd = 0; subd < 8; subd++){
+		run_ref[subd] = new TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + ref_runs[subd] + ".root", "READ");
+	}
 	TFile *run_ana = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run2_i] + ".root", "READ");
+	TFile *output = new TFile("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + ".root", "RECREATE");
+	TCanvas *cnvs;
 	TH2F	*ampl_ref[8], *ampl_ana[8], *ampl_ratio[8];
 	TH1F	*ratio_distr[8];
 	int chan_count = 0; 		//all channels
@@ -150,11 +155,11 @@ vector<Int_t> Drun_HCAL(int run1_i = 0, int run2_i = 1, double threshold = 0.03,
 
 	//loop over all subdetectors
 	for(int subd = 0; subd < 8; subd++){
-		run_ref = new TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + ref_runs[subd] + ".root", "READ");
+		//run_ref = new TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + ref_runs[subd] + ".root", "READ");
 		hist_name = subd_depth_name[subd];
 
 		//if requiered histograms are presented in the LED files - read them
-		if ((ampl_ref[subd] = (TH2F*)run_ref->Get(hist_name))&&(ampl_ana[subd] = (TH2F*)run_ana->Get(hist_name))){
+		if ((ampl_ref[subd] = (TH2F*)run_ref[subd]->Get(hist_name))&&(ampl_ana[subd] = (TH2F*)run_ana->Get(hist_name))){
 			//normalisation and calculation of gain drift (ratio)	
 			ampl_ana[subd]->Scale(1./ampl_ana[subd]->GetEntries());
 			ampl_ref[subd]->Scale(1./ampl_ref[subd]->GetEntries());
@@ -247,29 +252,31 @@ vector<Int_t> Drun_HCAL(int run1_i = 0, int run2_i = 1, double threshold = 0.03,
 		//return counters to zero
 		cal_count = 0;
 		chan_count = 0;
+
+
+		//write all histos to .root file and to .gif files
+
+		cnvs = new TCanvas(titles[subd]);
+		ampl_ratio[subd]->Draw("colz");
+		if(!from_nrun) cnvs->Print("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + "_2D" + titles[subd] + ".gif");
+		ratio_distr[subd]->Draw("");
+		if(!from_nrun) cnvs->Print("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + "_1D" + titles[subd] + ".gif");
+		delete cnvs;
+
+		ampl_ratio[subd]->Write();
+		ratio_distr[subd]->Write();
+
+		run_ref[subd]->Close();
+		delete run_ref[subd];
 	}
+
+	run_ana->Close();
+	delete run_ana;
+	output->Close();
+	delete output;
 
 	if(from_nrun) cout << ":\t" << tot_cal_count << "\n";
 
-	//write all histos to .root file and to .gif files
-
-	TFile *output = new TFile("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + ".root", "RECREATE");
-	TCanvas *cnvs;
-	for(int i = 0; i < 8; i++){
-		cnvs = new TCanvas(titles[i]);
-		ampl_ratio[i]->Draw("colz");
-		if(!from_nrun) cnvs->Print("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + "_2D" + titles[i] + ".gif");
-		ratio_distr[i]->Draw("");
-		if(!from_nrun) cnvs->Print("./plots/Drun_" + runs[run1_i] + "_" + runs[run2_i] + "_1D" + titles[i] + ".gif");
-		delete cnvs;
-		ampl_ratio[i]->Write();
-		ratio_distr[i]->Write();
-	}
-
-	run_ref->Close();
-	run_ana->Close();
-	output->Close();
-	delete output;
 	return bads;
 }
 
