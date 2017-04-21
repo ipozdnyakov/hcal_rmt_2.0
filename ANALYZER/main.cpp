@@ -9,7 +9,6 @@
 #include<TH2F.h>
 
 #include"input.h"
-#include"cell.h"
 
 using namespace std;
 
@@ -45,7 +44,7 @@ cout << "Bad runs are found\n";
 
 cout << "Bad runs are written\n";
 
-	cout.rdbuf(bad_cells_s.rdbuf());
+/*	cout.rdbuf(bad_cells_s.rdbuf());
 	Drun_HCAL(0, nruns-1, 0.05, false);
 	bad_cells_s.close();
 	cout.rdbuf(console);
@@ -57,7 +56,7 @@ cout << "Bad cells are found\n";
 	gain_drifts_s.close();
 	cout.rdbuf(console);
 
-cout << "Bad cells are done\n";
+cout << "Bad cells are done\n";*/
 
 /*	cout.rdbuf(gain_drifts_interest_s.rdbuf());
 	Ncell("cells_of_interest");
@@ -284,16 +283,37 @@ void Ncell(TString file_name){
 
 	int subd = 0, ieta = 0, iphi = 0;
 	vector<vector<double> > drifts;
+	vector<vector<int> > cells;
+	vector<int> cell;
 
 	FILE *file = fopen("./output/"+file_name,"r");
 
      	fscanf(file, "Threshold= %*f RefRun= 271961 AnalazedRun=  "+ runs[nruns-1] + ":");	
 
 	while(!feof(file)){
+
      		fscanf(file, "%d %d %d", &subd, &ieta, &iphi);	
-		drifts.push_back(Nrun_cell(subd, ieta, iphi));
-		//Drun_cell(runs[0], runs[nruns-1], subd, ieta, iphi);
-		//cout << "\n";
+
+		//position of a cell in eta is translated to the bin number
+		if(ieta > 0){
+			ieta = ieta + 41;
+		}else{
+			ieta = ieta + 42;
+		}
+
+		cell.push_back(subd);
+		cell.push_back(ieta);
+		cell.push_back(iphi);
+		cells.push_back(cell);
+		cell.clear();
+	}
+
+	for(int i = 0; i < cells.size(); i++){
+		cout << setw(11) << "(" << cells[i][0] << ";" << cells[i][1] << ";" << cells[i][2] << ")\t";
+	}
+
+	for(int i = 0; i < nruns; i++){
+		drifts.push_back(Nrun_cell(cells, i));
 	}
 
 	TFile   *out  = new TFile("./plots/HCAL_evol_" + file_name + ".root", "RECREATE");
@@ -302,7 +322,7 @@ void Ncell(TString file_name){
 	TString name = "cell_";
 	int color = 1;
 
-	for(int i = 0; i < drifts.size(); i++){
+	for(int i = 0; i < drifts[0].size(); i++){
 		color = i%50;
 		if((color == 0)||(color == 10)||(color == 19)) color = 2;
 		evol = new TH1D("Gain_Drifts","Gain_Drifts", nruns, 0, nruns);
@@ -316,8 +336,8 @@ void Ncell(TString file_name){
 		evol->SetLineWidth(1);
 		evol->SetMarkerColor(color);
 		evol->SetMarkerStyle(7);
-		for(int j = 0; j < drifts[i].size(); j++){
-			evol->Fill(j+0.5, drifts[i][j]);
+		for(int j = 0; j < drifts.size(); j++){
+			evol->Fill(j+0.5, drifts[j][i]);
 			if(j%4 == 0){
 				evol->GetXaxis()->SetBinLabel(j+1,dates[j]);
 			}else{
@@ -332,107 +352,59 @@ void Ncell(TString file_name){
 	delete out;
 }
 
-vector<double> Nrun_cell(int subd, int ieta, int iphi){
+vector<double> Nrun_cell(vector<vector<int> > cells, int run){
 
-//loop over all runs with regard to the first one
+//loop over all cells for the run with regard to the first run
 
 	vector<double> drifts;
-
-	cout << setw(11) << "(" << subd << ";" << ieta << ";" << iphi << ")\t";
-
-	double drift = 0.;
-
-	for(int i = 0; i < nruns; i++){
-		drift = Drun_cell(0, i, subd, ieta, iphi);
-		drifts.push_back(drift);
-	}
-	cout << "\n";
-	
-	return drifts;
-}
-
-double Drun_cell(int run1_i = 0, int run2_i = 1, int subd = 0, int ieta = 0, int iphi = 0){
-
-//position of a cell in eta is translated to the bin number
-
-	if(ieta > 0){
-		ieta = ieta + 41;
-	}else{
-		ieta = ieta + 42;
-	}
+	int subd = 0, ieta = 0, iphi = 0;
 
 //declaration of reference and analysed files and TH2D histos for the data from them
 
-	TFile *run_ref = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run1_i] + ".root", "READ");
-	TFile *run_ana = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run2_i] + ".root", "READ");
+	TFile *run_ref = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[0] + ".root", "READ");
+	TFile *run_ana = new TFile( "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + runs[run] + ".root", "READ");
 	TH2F  *ampl_ref, *ampl_ana;
 	TString	hist_name;
 
-//choosing data (histograms) from files by names according to input subdetector number
-
-	hist_name = subd_depth_name[subd];
-
-//reading data from files, normalyzing and calculation of gain drift
-//and output of result
-
 	double drift = 1.;
 
-	if ((ampl_ref = (TH2F*)run_ref->Get(hist_name))&&(ampl_ana = (TH2F*)run_ana->Get(hist_name))){
-		ampl_ana->Scale(1./ampl_ana->GetEntries());
-		ampl_ref->Scale(1./ampl_ref->GetEntries());
+	for(int i = 0; i < cells.size(); i++){
+		subd = cells[i][0];
+		ieta = cells[i][1];
+		iphi = cells[i][2];
 
-		if (ampl_ref->GetBinContent(ieta, iphi) != 0.){
-			drift = ampl_ana->GetBinContent(ieta, iphi)/ampl_ref->GetBinContent(ieta, iphi);
-			if((drift > 0.8)&&(drift < 1.2)){
-			cout << setw(8) << drift << "\t";
+		//choosing data (histograms) from files by names according to input subdetector number
+		hist_name = subd_depth_name[subd];
+
+		//reading data from files, normalyzing and calculation of gain drift
+		//and output of result
+
+		if ((ampl_ref = (TH2F*)run_ref->Get(hist_name))&&(ampl_ana = (TH2F*)run_ana->Get(hist_name))){
+			ampl_ana->Scale(1./ampl_ana->GetEntries());
+			ampl_ref->Scale(1./ampl_ref->GetEntries());
+
+			if (ampl_ref->GetBinContent(ieta, iphi) != 0.){
+				drift = ampl_ana->GetBinContent(ieta, iphi)/ampl_ref->GetBinContent(ieta, iphi);
+				if((drift > 0.)&&(drift < 2.)){
+					cout << setw(8) << drift << "\t";
+				}else{
+					cout << setw(8) << "%%%" << "\t";
+					drift = 1;
+				}
 			}else{
-			cout << setw(8) << "%%%" << "\t";
-			drift = 1;
+				cout << "ref_to_zero\t";
+				drift = 1;
 			}
-		}else{
-			cout << "ref_to_zero\t";
-			drift = 1;
 		}
+
+		drifts.push_back(drift);
 	}
 
-run_ref->Close();
-run_ana->Close();
-delete run_ref;
-delete run_ana;
-return drift;
-}
+	cout << "\n";
 
-//-----------------------|
-//class Cell:: definition|
-//-----------------------|
-
-Cell::Cell():run_count(0), change_trend(false){}
-
-Cell::Cell(int subd, int eta, int phi):
-subd(subd), eta(eta), phi(phi), run_count(0), change_trend(false){
-
-	if((subd < 0)||(subd > 7)) cout << "HCAL Error: There are only 8 subdetectors from 0 - HB1 to 7 - HO4\n";
-	subd_name = subd_depth_name[subd];
-	depth = subd_depth[subd];
-
-}
-
-Cell::Cell(TString subd_name, int depth, int eta, int phi): 
-subd_name(subd_name), depth(depth), eta(eta), phi(phi), run_count(0), change_trend(false){
-
-	for(int i = 0; i < 8; i++){
-		if(subd_name == subd_depth_name[i]) subd = i;
-	}
-
-}
-
-void Cell::AddEvent(double sum_TS){
-	event_count[run_count - 1]++;
-	sum_ampl[run_count - 1].Fill(sum_TS);
-}
-
-void Cell::AddRun(){
-	run_count++;
-	event_count.push_back(0);
-	sum_ampl.push_back(TH1D("","",1000,0,10000));
+	run_ref->Close();
+	run_ana->Close();
+	delete run_ref;
+	delete run_ana;
+	return drifts;
 }
