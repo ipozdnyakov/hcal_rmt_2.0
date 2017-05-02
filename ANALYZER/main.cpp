@@ -68,7 +68,7 @@ void Ncell(TString file_name){
 	}
 
 	TFile   *out  = new TFile("./plots/HCAL_evol_" + file_name + ".root", "RECREATE");
-	TCanvas *cnvs =  new TCanvas("HCAL_evol");
+	TCanvas *cnvs = new TCanvas("HCAL_evol");
 	TH1D	*evol; 
 	TString name = "cell_";
 	int color = 1;
