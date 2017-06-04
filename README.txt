@@ -1,68 +1,74 @@
+
+LAST CHECK or UPDATE MONITORING: 21.02.2017
+
+Project should be run from lxplus to have acces to all the  LED
+files and other information.
+
 1. INTRODUCTION
 
 	This project is intended to monitoring gains of hybrid 
 	photodetectors (HPD) and photomultiplier  tubes  (PMT) 
 	in CMS HCAL.
 
-	Project consists of two parts - 
-		1) PRODUCER. Filling histograms and TTrees 
-		   with ADC responses on LEDs. 
-		2) ANALYZER. Analyzing ADC responses on LEDs 
-		   and monitoring gains drifts. 
+	Project consists of two parts - ANALAYZER and PRODUCER
+	(PRODUCER part is not completed yet)
+
+      >>ANALYZER.  Analyzing  ADC  responses   on   LEDs   and
+	monitoring gains drifts. It contains c++ (>>/code_cpp)
+	as well as separate python scripts (>>/code_py)
+
+      >>/code_cpp  -- a  set  of  C++  functions  called  from 
+	the main(), monitor.exe is produced  by  >>./maker_gcc 
+	and run by >>./monitor.exe
+
+      >>/code_py   -- a set of python scripts  to  be  run  as
+	>>python <script_name>.py
+
+	------------------------------------------------------
+	______________________________________________________
 
 	There are 8 subdetectors in  HCAL  and  the  following 
 	numeration is used in the project:
-		(0) HB depth 1, (1) depth 2
-		(2) HE depth 1, (3) depth 2, (4) depth 3
-		(5) HF depth 1, (6) depth 2
-		(7) HO depth 4
+
+	(I)	(0) HB depth 1, (1) depth 2
+	(II)	(2) HE depth 1, (3) depth 2, (4) depth 3
+	(III)	(5) HF depth 1, (6) depth 2
+	(IV)	(7) HO depth 4
+
 	HINT: One  should  not  divide  results  by  depths in 
 	presentations due to direct (independent of depth) way 
-	from LED to PMT/HPT
+	from LED to PMT/HPD
+
+	2017: the SiPM devices where added to  test  them  for
+	the future CMS upgrade. They are  placed  in  some  HE
+	sector and spans among depth 1 to depth 7.
 
 
-2. ARCHITECTURE OF THE PROJECT
+2. INPUT FOR THE ANALYZER
 
-	PRODUCER is a CMSSW analyzer, which  takes  data  from 
-	local  runs  (LED  runs)  of  CMS  detector  that  are 
-	permanently stored in CMS database. Code should be run 
-	from CMSSW_X_X_X/src, as PRODUCER initially taken from
-		/afs/cern.ch/cms/CAF/CMSALCA/ALCA_HCALCALIB/ \
-		HCALMONITORING/RDMScript/                    \
-		CMSSW807patch2_STABLE/src/RecoHcal/	     \
- 
-	ANALYZER  is  a  set  of  C++  functions  called  from 
-	the main(). Output monitor.exe produced  by  maker_gcc 
-	should  be  run  from  lxplus  - to  have   acces   to 
-	/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/
+      >>/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_*
+	(LED  files ) produced  with VeRawAnalyzer.cc are used
+	as input for the  monitoring. This folder is  regulary
+	updated by Alexandr Zhokin and Olga Kodolova
 
-2.1 INPUT DATA FOR PRODUCER
+      >>led_runs - contains a list of LED runs  ever  produced 
+	as taken from the web-page - 
+	    https://cms-conddb-dev.cern.ch/eosweb/hcal/HcalRemoteMonitoring/RMT/
+	(currently about 994 LED runs) and their information
 
-2.2 INPUT DATA FOR ANALYZER
-
-	Files /afs/cern.ch/work/k/kodolova/public/RDMweb/    \
-	      histos/LED_*     (LED  files )    produced  with 
-	VeRawAnalyzer.cc are used as input for the  monitoring
-
-	There are a lot of histos in these files,  content  of 
-	some of them is determined as follows
-
-	TH2F    --   h_mapDepth1/2/3/4ADCAmpl_HB/HE/HF/HO   --		
+      >>LED_xxxxxx.root - examplea  of  LED  files  for  local
+	and manual investigation. There are a lot of histos in
+	these files, content of	some of them is determined  as
+	follows:
+	    TH2F  --  h_mapDepth[1/2/3/4]ADCAmpl_[HB/HE/HF/HO]		
 	- amplitude = summ of  all  10  time  slices  (TS), it 
 	depends on flags     useADCmassive/fC/Ccounts_     and
 	usePedestalSubtraction_ -- at all 8 histos
-	
-	Currently  histos h_mapDepth1/2/3/4ADCAmpl_HB/HE/HF/HO 
-	only used for monitoring, meaning of some other histos
-	might be found among first 7 commits of the project
+	    Meaning of content of some other histos  might  be
+	found among first 7 commits of the project.
 
 
-3. CONTENT OF THE PROJECT
-
-PRODUCER:
-
-
-ANALYZER:
+3. CONTENT OF THE ANALYZER
 
 	/plots	
 	- directory for output .root and .gif files
@@ -117,12 +123,7 @@ ANALYZER:
 	- return name of histogram of interest by  the  number 
 	of subdetector
 
-4. USE OF THE PROJECT
-
-4.1 USER MANUAL FOR PRODUCER
-
-
-4.2 USER MANUAL FOR ANALYZER
+4. USE OF THE ANALYZER
 
 	One can use this project as follows:
 
@@ -135,7 +136,6 @@ ANALYZER:
 
 	3) Check outputs in Nrun_HCAL and Drun_HCAL
 	   performing steps 3a),3b) and 3b) in code of main():
-
 	3a) Run Nrun_HCAL - see how total number of cells wich 
 	   are need to be calibrated changes with time
 	3b) Run Drun_HCAL for first and last runs of  interest 
@@ -151,20 +151,40 @@ Notes:
 	> ./monitor.exe 	- to run
 	Folders /input and /output should be created  manually
 
-
 5. TASKS FOR FURTHER DEVELOPMENT
-------------------------------------
 0) there are strong need to integrate with a lot of already done work in large RMT project
 	- https://twiki.cern.ch/twiki/bin/viewauth/CMS/HcalRemoteMonitoring
-------------------------------------
 1) add Q > 50 linADC criteria for each cell in reference run
 2) implement purity and stability for monitoring of overal run quality and distinguish drift from fluctuations
-3) define places/sites for permanent storage of input LED files (output of VeRawAnalyzer) and output files with histos and plots of gain drifts
-4) make procedure of defining Magnet_on and Magnet_off LED runs clear in README.txt (run summary and RMT table)
-------------------------------------
+3) make procedure of defining Magnet_on and Magnet_off LED runs clear in README.txt (run summary and RMT table)
 1) create simple, universal and lightweighted analyzer for local runs with only tree and few histos in output
 2) create procedures and documentation for using analyzer, getting input and storing output files
-3) create postprocessor for output of analyzer, which plot maps and evolution curves, gives permanent list of gains drifts
 
 
-LAST CHECK: 21.02.2017
+
+------------------------------------
+------------------------------------
+------------------------------------
+
+
+
+4.2 USER MANUAL FOR PRODUCER
+
+	--
+
+
+	*OPTION*2) PRODUCER.  Filling  histograms  and  TTrees 
+		   with ADC responses  on  LEDs.  -  currently
+		   not developed// the same work is  performed
+		   regularly  by  Alexandr  Zhokin  and   Olga
+		   Kodolova.
+
+	PRODUCER is a CMSSW analyzer, which  takes  data  from 
+	local  runs  (LED  runs)  of  CMS  detector  that  are 
+	permanently stored in CMS database. Code should be run 
+	from CMSSW_X_X_X/src, as PRODUCER initially taken from
+		/afs/cern.ch/cms/CAF/CMSALCA/ALCA_HCALCALIB/ \
+		HCALMONITORING/RDMScript/                    \
+		CMSSW807patch2_STABLE/src/RecoHcal/	     \
+
+
