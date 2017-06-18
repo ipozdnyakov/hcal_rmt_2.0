@@ -32,6 +32,6 @@ for run in run_dict:
 #any entries
         if sum(map(root.TH2F.GetEntries, hist)) != 0:
 #any entries in SiPM HE 
-            if sum(map(root.TH2F.GetEntries, hist[3:])) != 0:
-                print run,'\t',run_dict[run][0],'\t',run_dict[run][1] #map(root.TH2F.GetEntries, hist)
+            if sum(map(root.TH2F.GetEntries, hist[3:]))/int(run_dict[run][1]) > 188*0.9:
+                print run,'\t',run_dict[run][0],'\t',run_dict[run][1] #,sum(map(root.TH2F.GetEntries, hist[3:]))/int(run_dict[run][1])
 #END

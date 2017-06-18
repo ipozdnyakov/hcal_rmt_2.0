@@ -30,10 +30,12 @@ files and other information.
 	There are 8 subdetectors in  HCAL  and  the  following 
 	numeration is used in the project:
 
-	(I)	(0) HB depth 1, (1) depth 2
+	(I)	(0) HB depth 1, (1) depth 2		 -2592
 	(II)	(2) HE depth 1, (3) depth 2, (4) depth 3
 	(III)	(5) HF depth 1, (6) depth 2
 	(IV)	(7) HO depth 4
+
+	(V)	HEP17 SiPM				 -188
 
 	HINT: One  should  not  divide  results  by  depths in 
 	presentations due to direct (independent of depth) way 
