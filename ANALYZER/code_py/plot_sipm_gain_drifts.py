@@ -17,21 +17,16 @@ with open('../output/led_sipm_he_runs', mode='r') as infile:
 #('2017-05-05 ', 293364, 2000)
 #('2017-05-05 ', 293316, 2000)
 #('2017-05-05 ', 293319, 2000)
-
 #('2017-05-05 ', 293354, 2000)
 #('2017-05-05 ', 293366, 2000)
 #('2017-05-05 ', 293367, 2000)
 #('2017-05-05 ', 293322, 2000)
 #('2017-05-05 ', 293353, 2000)
 #('2017-05-05 ', 293364, 2000)
-
 #('2017-05-08 ', 293517, 2000)
 
 run_list = sorted(run_list, key = lambda x: x[0])
 run_list = run_list[run_list.index(('2017-05-08 ', 293517, 2000)):]
-
-#for l in run_list:
-#    print l
 
 #create a set of cells
 with open('../map_hep17_sipm', 'r') as infile:
@@ -81,7 +76,6 @@ ax.set_ylabel('ratio to run 293517, 2017-05-08')
 
 plt.xticks(range(1,len(run_list)+1)[1::5],[x[0] for x in run_list][1::5])
 plt.xticks(rotation=90)
-#plt.yscale('log')
 plt.ylim(0.9,1.1)
 plt.subplots_adjust(bottom=0.2)
 plt.savefig('results.png')
