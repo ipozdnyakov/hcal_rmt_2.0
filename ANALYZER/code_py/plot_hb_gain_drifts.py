@@ -4,16 +4,13 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-def date_aligner(date):
-    return '-'.join(date[:-1].replace('.','-').split('-')[::-1]) if '.' in date else date[:-1]
-
 #create a sorted list of runs [(date,run_number,n_of_events)]
 run_list = []
 with open('../output/led_hb_runs', mode='r') as infile:
     reader = csv.reader(infile, delimiter='\t')
-    run_list = [(date_aligner(row[1]),int(row[0]),int(row[2])) for row in reader]
+    run_list = [(row[1],int(row[0]),int(row[2])) for row in reader]
 
-#('2017-05-08 ', 293564, 2000)
+#('2017-05-08', 293564, 2000)
 run_list = sorted(run_list, key = lambda x: x[0])
 run_list = run_list[run_list.index(('2017-05-08', 293564, 2000)):]
 for x in run_list:
