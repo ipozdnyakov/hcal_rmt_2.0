@@ -4,6 +4,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
+src = "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos"
+
 for subd in ('hb','he','hf','ho'):
     #create a sorted list of runs [(date,run_number,n_of_events)]
     run_list = []
@@ -14,7 +16,7 @@ for subd in ('hb','he','hf','ho'):
     #('2017-05-08', 293564, 2000)
     #(293657, '2017-05-09', 2000)
     #293631  2017-05-09
-    run_list = run_list[run_list.index(('2017-05-09', 293657, 2000)):]
+    run_list = run_list[run_list.index(('2017-05-16', 294088, 2000)):]
     #for x in run_list:
     #    print x
 
@@ -24,7 +26,7 @@ for subd in ('hb','he','hf','ho'):
 	map_subd = set((int(x[0]),int(x[1]),int(x[2])) for x in reader)
 
     histname = [
-        'h_mapDepth1ADCAmpl_HB',        #0
+        'h_mapDepth1ADCAmpl_HB',        #0  h_mapDepth2ADCAmpl12 - 4 TS around max
         'h_mapDepth2ADCAmpl_HB',        #1
         'h_mapDepth1ADCAmpl_HE',        #2
         'h_mapDepth2ADCAmpl_HE',        #3
@@ -38,14 +40,14 @@ for subd in ('hb','he','hf','ho'):
 
     #ref run
     run = run_list[0]
-    file = root.TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + str(run[1]) + ".root", "READ")
+    file = root.TFile(src + "/LED_" + str(run[1]) + ".root", "READ")
     hist = map(file.Get,histname)
     ref_cells = dict(((depth,eta,phi),hist[depths.index(depth)].GetBinContent(eta+41 if eta>0 else eta+42, phi+1)/run[2]) for (depth,eta,phi) in map_subd)
 
     results = dict((x,[]) for x in map_subd)
 
     for run in run_list:
-        file = root.TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + str(run[1]) + ".root", "READ")
+        file = root.TFile(src + "/LED_" + str(run[1]) + ".root", "READ")
         hist = map(file.Get,histname)
         cells = dict(((depth,eta,phi),hist[depths.index(depth)].GetBinContent(eta+41 if eta>0 else eta+42,phi+1)/run[2]) for (depth,eta,phi) in map_subd)
         results = dict((x,results[x] + [cells[x]/ref_cells[x] if ref_cells[x] != 0 else 1]) for x in map_subd)
@@ -59,12 +61,12 @@ for subd in ('hb','he','hf','ho'):
     ax = fig.add_subplot(111)
     fig.subplots_adjust(top=0.85)
     ax.set_title('Ratio of Sum of 10 ADC Slices of each event in each run for each cell')
-    ax.set_ylabel('ratio to run 293657, 2017-05-09')
+    ax.set_ylabel('ratio to run 294088, 2017-05-16')
 
 
     plt.xticks(range(0,len(run_list)+1)[0::1],[x[0] for x in run_list][0::1])
     plt.xticks(rotation=90)
-    plt.ylim(-0.1,2.1)
+    plt.ylim(-0.1,21.1)
     plt.subplots_adjust(bottom=0.2)
     plt.savefig('../plots/results_' + subd + '.png')
     print subd

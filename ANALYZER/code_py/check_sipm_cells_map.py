@@ -1,6 +1,8 @@
 import csv
 import ROOT as root
 
+src = "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos"
+
 def count_cells(hist2F):
     n = hist2F.GetNbinsX() #eta
     m = hist2F.GetNbinsY() #phi
@@ -46,7 +48,7 @@ histname = [
 depths = [0,1,2,3,4,5,6,0,1,2]
 
 for run in run_dict:
-    file = root.TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + str(run) + ".root", "READ")
+    file = root.TFile(src + "/LED_" + str(run) + ".root", "READ")
     hist = map(file.Get,histname)
     c = map(count_cells_in_map, [(x[0], x[1], map_hep17_sipm) for x in zip(hist[3:], depths[3:])])
     print run,'\t',run_dict[run][0],'\t',run_dict[run][1],'\t', map(count_cells, hist[3:]), c

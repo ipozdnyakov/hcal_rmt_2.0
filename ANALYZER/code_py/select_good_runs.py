@@ -1,6 +1,8 @@
 import csv
 import ROOT as root
 
+src = "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos"
+
 def date_aligner(date):
     return '-'.join(date.replace('.','-').split('-')[::-1]) if '.' in date else date
 
@@ -21,14 +23,14 @@ run_dict.pop(260777, None)
 run_dict.pop(285356, None)
 
 histname = [
-    'h_mapDepth1ADCAmpl_HB',        #0
-    'h_mapDepth2ADCAmpl_HB',        #1
-    'h_mapDepth1ADCAmpl_HE',        #2
-    'h_mapDepth2ADCAmpl_HE',        #3
-    'h_mapDepth3ADCAmpl_HE',        #4
-    'h_mapDepth1ADCAmpl_HF',        #5
-    'h_mapDepth2ADCAmpl_HF',        #6
-    'h_mapDepth4ADCAmpl_HO',        #7
+    'h_mapDepth1ADCAmpl12_HB',        #0
+    'h_mapDepth2ADCAmpl12_HB',        #1
+    'h_mapDepth1ADCAmpl12_HE',        #2
+    'h_mapDepth2ADCAmpl12_HE',        #3
+    'h_mapDepth3ADCAmpl12_HE',        #4
+    'h_mapDepth1ADCAmpl12_HF',        #5
+    'h_mapDepth2ADCAmpl12_HF',        #6
+    'h_mapDepth4ADCAmpl12_HO',        #7
 ]
 
 hb_runs = []
@@ -37,7 +39,7 @@ hf_runs = []
 ho_runs = []
 
 for run in run_dict:
-    file = root.TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + str(run) + ".root", "READ")
+    file = root.TFile(src + "/LED_" + str(run) + ".root", "READ")
     hist = map(file.Get,histname)
 #check there are all HB histograms and entries
     if [type(h) == type(root.TH2F()) for h in hist[0:2]].count(True) == 2:

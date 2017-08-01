@@ -4,6 +4,8 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
+src = "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos"
+
 #create a sorted list of runs [(date,run_number,n_of_events)]
 run_list = []
 with open('../output/led_sipm_he_runs', mode='r') as infile:
@@ -26,7 +28,7 @@ with open('../output/led_sipm_he_runs', mode='r') as infile:
 #('2017-05-08 ', 293517, 2000)
 
 run_list = sorted(run_list, key = lambda x: x[0])
-run_list = run_list[run_list.index(('2017-05-08 ', 293517, 2000)):]
+run_list = run_list[run_list.index(('2017-05-08', 293517, 2000)):]
 
 #create a set of cells
 with open('../map_hep17_sipm', 'r') as infile:
@@ -50,14 +52,14 @@ depths = [0,1,2,3,4,5,6,0,1,2]
 
 #ref run
 run = run_list[0]
-file = root.TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + str(run[1]) + ".root", "READ")
+file = root.TFile(src + "/LED_" + str(run[1]) + ".root", "READ")
 hist = map(file.Get,histname[3:])
 ref_cells = dict(((depth,eta,phi),hist[depths[3:].index(depth)].GetBinContent(eta+41,phi+1)/run[2]) for (depth,eta,phi) in map_hep17_sipm)
 
 results = dict((x,[]) for x in map_hep17_sipm)
 
 for run in sorted(run_list, key = lambda x: x[0]):
-     file = root.TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + str(run[1]) + ".root", "READ")
+     file = root.TFile(src + "/LED_" + str(run[1]) + ".root", "READ")
      hist = map(file.Get,histname[3:])
      cells = dict(((depth,eta,phi),hist[depths[3:].index(depth)].GetBinContent(eta+41,phi+1)/run[2]) for (depth,eta,phi) in map_hep17_sipm)
      results = dict((x,results[x] + [cells[x]/ref_cells[x] if ref_cells[x] != 0 else 0]) for x in map_hep17_sipm)
@@ -78,4 +80,4 @@ plt.xticks(range(1,len(run_list)+1)[1::5],[x[0] for x in run_list][1::5])
 plt.xticks(rotation=90)
 plt.ylim(0.9,1.1)
 plt.subplots_adjust(bottom=0.2)
-plt.savefig('../plots/results.png')
+plt.savefig('../plots/results_sipm_he.png')

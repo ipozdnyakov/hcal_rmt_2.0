@@ -1,6 +1,14 @@
 import csv
 import ROOT as root
 
+src = "/afs/cern.ch/work/k/kodolova/public/RDMweb/histos"
+
+def file_writer(name,ll):
+    with open(name, 'wb') as csvfile:
+        wrt = csv.writer(csvfile, delimiter='\t')
+        for l in ll:
+            wrt.writerow(l)
+
 #create a dictionary of {run_number:(date,n_of_events)}
 run_dict = dict()
 with open('../led_runs', mode='r') as infile:
@@ -24,8 +32,10 @@ histname = [
     'h_mapDepth3ADCAmplSiPM_HE'     #9
 ]
 
+sipm_runs = []
+
 for run in run_dict:
-    file = root.TFile("/afs/cern.ch/work/k/kodolova/public/RDMweb/histos/LED_" + str(run) + ".root", "READ")
+    file = root.TFile(src + "/LED_" + str(run) + ".root", "READ")
     hist = map(file.Get,histname)
 #all HE histograms
     if [type(h) == type(root.TH2F()) for h in hist].count(True) == 10:
@@ -33,5 +43,8 @@ for run in run_dict:
         if sum(map(root.TH2F.GetEntries, hist)) != 0:
 #any entries in SiPM HE 
             if sum(map(root.TH2F.GetEntries, hist[3:]))/int(run_dict[run][1]) > 188*0.9:
-                print run,'\t',run_dict[run][0],'\t',run_dict[run][1] #,sum(map(root.TH2F.GetEntries, hist[3:]))/int(run_dict[run][1])
+                sipm_runs.append([run,run_dict[run][0],run_dict[run][1]])
+#               print run,'\t',run_dict[run][0],'\t',run_dict[run][1] #,sum(map(root.TH2F.GetEntries, hist[3:]))/int(run_dict[run][1])
 #END
+
+file_writer('../output/led_sipm_he_runs',sorted(sipm_runs, key = lambda x: x[1]))
