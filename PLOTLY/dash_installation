@@ -1,0 +1,7 @@
+#!/bin/bash
+# from https://plot.ly/dash/installation
+pip install --user dash==0.17.7 # The core dash backend 
+pip install --user dash-renderer==0.7.4 # The dash front-end 
+pip install --user dash-html-components==0.7.0 # HTML components 
+pip install --user dash-core-components==0.11.0 # Supercharged components
+pip install --user plotly==2.0.13  # Plotly graphing library used in examples
